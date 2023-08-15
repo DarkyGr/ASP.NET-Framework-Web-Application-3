@@ -1,0 +1,42 @@
+﻿@model MVC_Proyecto_GRM.Models.ViewModels.Vehiculos.VehiculoAgregar
+@{
+    ViewBag.Title = "Agregar un nuevo vehículo";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("VehiculoAgregar", "Vehiculos", FormMethod.Post))    // Metodo, Controller, Post Method
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.Matricula)
+                @Html.TextBoxFor(d => d.Matricula, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Matricula, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Marca)
+                @Html.TextBoxFor(d => d.Marca, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Marca, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Modelo)
+                @Html.TextBoxFor(d => d.Modelo, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Modelo, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Capacidad)
+                @Html.TextBoxFor(d => d.Capacidad, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Capacidad, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Kilometraje)
+                @Html.TextBoxFor(d => d.Kilometraje, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Kilometraje, "", new { @class = "red" })
+            </div>            
+            <div style="text-align: right;">
+                <input value="Guardar" class="btn btn-success" type="submit" />
+            </div>
+        </div>
+    </div>
+}
