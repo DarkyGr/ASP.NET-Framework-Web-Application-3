@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6f6b75c354684b7eb4569e6b3c515801" Name="Diagram1">
+        <EntityTypeShape EntityType="RentaCarrosModel.Clientes" Width="1.5" PointX="9.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentaCarrosModel.Direcciones" Width="1.5" PointX="6.125" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentaCarrosModel.Empleados" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentaCarrosModel.Mantenimientos" Width="1.5" PointX="8.875" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentaCarrosModel.Rentas" Width="1.5" PointX="6.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentaCarrosModel.Vehiculos" Width="1.5" PointX="3.75" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="RentaCarrosModel.FK__Clientes__Direcc__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="RentaCarrosModel.FK__Rentas__ClienteI__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="RentaCarrosModel.FK__Empleados__Puest__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="RentaCarrosModel.FK__Rentas__Empleado__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="RentaCarrosModel.FK__Mantenimi__Vehic__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="RentaCarrosModel.FK__Rentas__Vehiculo__440B1D61" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
