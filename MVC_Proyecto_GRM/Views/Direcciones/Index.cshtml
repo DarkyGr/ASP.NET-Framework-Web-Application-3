@@ -1,0 +1,45 @@
+﻿@model List<MVC_Proyecto_GRM.Models.ViewModels.Direcciones.DireccionesListar>
+@{
+    ViewBag.Title = "Listar Direcciones";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-xs-2 m-md-2" style="text-align: right;">
+        <a href="~/Direcciones/DireccionAgregar" class="btn btn-primary">Agregar Dirección</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-bordered">
+
+            <tr class="bg-warning text-center">
+                <th style="width: 15%;">ID Dirección</th>
+                <th>Calle</th>
+                <th>Número</th>
+                <th>Colonia</th>
+                <th>CP</th>
+                <th>Municpio</th>
+                <th>Ciudad</th>
+                <th>Estado</th>
+            </tr>
+
+            @foreach (var Elemento in Model)
+            {
+                <tr class="text-center">
+                    <td>@Elemento.DireccionId</td>
+                    <td>@Elemento.Calle</td>
+                    <td>@Elemento.Numero</td>
+                    <td>@Elemento.Colonia</td>
+                    <td>@Elemento.CP</td>
+                    <td>@Elemento.Municipio</td>
+                    <td>@Elemento.Ciudad</td>
+                    <td>@Elemento.Estado</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
