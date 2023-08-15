@@ -1,0 +1,46 @@
+﻿@model List<MVC_Proyecto_GRM.Models.ViewModels.Clientes.ClientesListar>
+@{
+    ViewBag.Title = "Listar Clientes";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-xs-2 m-md-2" style="text-align: right;">
+        <a href="~/Clientes/ClienteAgregar" class="btn btn-primary">Agregar Cliente</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-bordered">
+
+            <tr class="bg-warning text-center">
+                <th style="width: 15%;">ID Cliente</th>
+                <th>ID Dirección</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Teléfono</th>
+                <th>Número de Licencia</th>
+                <th>Fecha Vencimiento Licencia</th>
+            </tr>
+
+            @foreach (var Elemento in Model)
+            {
+                <tr class="text-center">
+                    <td>@Elemento.ClienteId</td>
+                    <td>@Elemento.DireccionId</td>
+                    <td>@Elemento.Nombre</td>
+                    <td>@Elemento.ApellidoP</td>
+                    <td>@Elemento.ApellidoM</td>
+                    <td>@Elemento.Telefono</td>
+                    <td>@Elemento.NumLicencia</td>
+                    <td>@Elemento.FechaVencimientoLicencia</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
