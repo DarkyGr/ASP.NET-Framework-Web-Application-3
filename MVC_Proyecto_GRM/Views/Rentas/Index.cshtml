@@ -23,6 +23,7 @@
                 <th>Costo</th>
                 <th>Fecha de Renta</th>
                 <th>Fecha de Renta Fin</th>
+                <th>Acciones</th>
             </tr>
 
             @foreach (var Elemento in Model)
@@ -35,6 +36,10 @@
                     <td>@Elemento.Costo</td>
                     <td>@Elemento.FechaRenta</td>
                     <td>@Elemento.FechaRentaFin</td>
+                    <td>
+                        <a class="btn btn-warning" href="~/Rentas/RentaEditar/@Elemento.RentaId"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger" href="~/Rentas/RentaEliminar/@Elemento.RentaId"><i class="fa-solid fa-trash"></i></a>
+                    </td>
                 </tr>
             }
 
