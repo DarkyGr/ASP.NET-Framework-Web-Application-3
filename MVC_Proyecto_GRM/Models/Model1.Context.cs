@@ -31,5 +31,9 @@ namespace MVC_Proyecto_GRM.Models
         public virtual DbSet<Mantenimientos> Mantenimientos { get; set; }
         public virtual DbSet<Rentas> Rentas { get; set; }
         public virtual DbSet<Vehiculos> Vehiculos { get; set; }
+        public virtual DbSet<View_Clientes> View_Clientes { get; set; }
+        public virtual DbSet<View_Empleados> View_Empleados { get; set; }
+        public virtual DbSet<View_Mantenimientos> View_Mantenimientos { get; set; }
+        public virtual DbSet<View_Rutas> View_Rutas { get; set; }
     }
 }

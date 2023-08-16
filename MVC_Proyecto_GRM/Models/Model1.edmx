@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RentaCarrosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RentaCarrosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Clientes">
           <Key>
             <PropertyRef Name="ClienteId" />
@@ -74,6 +74,92 @@
           <Property Name="Modelo" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Capacidad" Type="int" Nullable="false" />
           <Property Name="Kilometraje" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RentaCarros.dbo.View_Clientes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Clientes">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+            <PropertyRef Name="DireccionId" />
+            <PropertyRef Name="Dirección" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="ApellidoP" />
+            <PropertyRef Name="ApellidoM" />
+            <PropertyRef Name="NumLicencia" />
+          </Key>
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="DireccionId" Type="int" Nullable="false" />
+          <Property Name="Dirección" Type="varchar" MaxLength="244" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoM" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="10" />
+          <Property Name="NumLicencia" Type="int" Nullable="false" />
+          <Property Name="FechaVencimientoLicencia" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RentaCarros.dbo.View_Empleados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Empleados">
+          <Key>
+            <PropertyRef Name="EmpleadoId" />
+            <PropertyRef Name="DireccionId" />
+            <PropertyRef Name="Dirección" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="ApellidoP" />
+            <PropertyRef Name="ApellidoM" />
+            <PropertyRef Name="Salario" />
+            <PropertyRef Name="Puesto" />
+          </Key>
+          <Property Name="EmpleadoId" Type="int" Nullable="false" />
+          <Property Name="DireccionId" Type="int" Nullable="false" />
+          <Property Name="Dirección" Type="varchar" MaxLength="244" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoM" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salario" Type="float" Nullable="false" />
+          <Property Name="Puesto" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RentaCarros.dbo.View_Mantenimientos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Mantenimientos">
+          <Key>
+            <PropertyRef Name="MantenimientoId" />
+            <PropertyRef Name="VehiculoId" />
+            <PropertyRef Name="Vehiculo" />
+            <PropertyRef Name="Nota" />
+            <PropertyRef Name="Fecha" />
+          </Key>
+          <Property Name="MantenimientoId" Type="int" Nullable="false" />
+          <Property Name="VehiculoId" Type="int" Nullable="false" />
+          <Property Name="Vehiculo" Type="varchar" MaxLength="85" Nullable="false" />
+          <Property Name="Nota" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RentaCarros.dbo.View_Rutas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Rutas">
+          <Key>
+            <PropertyRef Name="RentaId" />
+            <PropertyRef Name="VehiculoId" />
+            <PropertyRef Name="Vehiculo" />
+            <PropertyRef Name="ClienteId" />
+            <PropertyRef Name="Cliente_Nombre" />
+            <PropertyRef Name="EmpleadoId" />
+            <PropertyRef Name="Empleado_Nombre" />
+            <PropertyRef Name="Costo" />
+            <PropertyRef Name="FechaRenta" />
+            <PropertyRef Name="FechaRentaFin" />
+          </Key>
+          <Property Name="RentaId" Type="int" Nullable="false" />
+          <Property Name="VehiculoId" Type="int" Nullable="false" />
+          <Property Name="Vehiculo" Type="varchar" MaxLength="85" Nullable="false" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="Cliente_Nombre" Type="varchar" MaxLength="152" Nullable="false" />
+          <Property Name="EmpleadoId" Type="int" Nullable="false" />
+          <Property Name="Empleado_Nombre" Type="varchar" MaxLength="152" Nullable="false" />
+          <Property Name="Costo" Type="float" Nullable="false" />
+          <Property Name="FechaRenta" Type="datetime" Nullable="false" />
+          <Property Name="FechaRentaFin" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK__Clientes__Direcc__3C69FB99">
           <End Role="Direcciones" Type="Self.Direcciones" Multiplicity="1" />
@@ -154,6 +240,54 @@
           <EntitySet Name="Mantenimientos" EntityType="Self.Mantenimientos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rentas" EntityType="Self.Rentas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_Clientes" EntityType="Self.View_Clientes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Clientes].[ClienteId] AS [ClienteId], 
+    [View_Clientes].[DireccionId] AS [DireccionId], 
+    [View_Clientes].[Dirección] AS [Dirección], 
+    [View_Clientes].[Nombre] AS [Nombre], 
+    [View_Clientes].[ApellidoP] AS [ApellidoP], 
+    [View_Clientes].[ApellidoM] AS [ApellidoM], 
+    [View_Clientes].[Telefono] AS [Telefono], 
+    [View_Clientes].[NumLicencia] AS [NumLicencia], 
+    [View_Clientes].[FechaVencimientoLicencia] AS [FechaVencimientoLicencia]
+    FROM [dbo].[View_Clientes] AS [View_Clientes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_Empleados" EntityType="Self.View_Empleados" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Empleados].[EmpleadoId] AS [EmpleadoId], 
+    [View_Empleados].[DireccionId] AS [DireccionId], 
+    [View_Empleados].[Dirección] AS [Dirección], 
+    [View_Empleados].[Nombre] AS [Nombre], 
+    [View_Empleados].[ApellidoP] AS [ApellidoP], 
+    [View_Empleados].[ApellidoM] AS [ApellidoM], 
+    [View_Empleados].[Salario] AS [Salario], 
+    [View_Empleados].[Puesto] AS [Puesto]
+    FROM [dbo].[View_Empleados] AS [View_Empleados]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_Mantenimientos" EntityType="Self.View_Mantenimientos" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Mantenimientos].[MantenimientoId] AS [MantenimientoId], 
+    [View_Mantenimientos].[VehiculoId] AS [VehiculoId], 
+    [View_Mantenimientos].[Vehiculo] AS [Vehiculo], 
+    [View_Mantenimientos].[Nota] AS [Nota], 
+    [View_Mantenimientos].[Fecha] AS [Fecha]
+    FROM [dbo].[View_Mantenimientos] AS [View_Mantenimientos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_Rutas" EntityType="Self.View_Rutas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Rutas].[RentaId] AS [RentaId], 
+    [View_Rutas].[VehiculoId] AS [VehiculoId], 
+    [View_Rutas].[Vehiculo] AS [Vehiculo], 
+    [View_Rutas].[ClienteId] AS [ClienteId], 
+    [View_Rutas].[Cliente_Nombre] AS [Cliente_Nombre], 
+    [View_Rutas].[EmpleadoId] AS [EmpleadoId], 
+    [View_Rutas].[Empleado_Nombre] AS [Empleado_Nombre], 
+    [View_Rutas].[Costo] AS [Costo], 
+    [View_Rutas].[FechaRenta] AS [FechaRenta], 
+    [View_Rutas].[FechaRentaFin] AS [FechaRentaFin]
+    FROM [dbo].[View_Rutas] AS [View_Rutas]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Clientes__Direcc__3C69FB99" Association="Self.FK__Clientes__Direcc__3C69FB99">
             <End Role="Direcciones" EntitySet="Direcciones" />
             <End Role="Clientes" EntitySet="Clientes" />
@@ -179,8 +313,7 @@
             <End Role="Rentas" EntitySet="Rentas" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RentaCarrosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -369,7 +502,89 @@
             <End Role="Vehiculos" EntitySet="Vehiculos" />
             <End Role="Rentas" EntitySet="Rentas" />
           </AssociationSet>
+          <EntitySet Name="View_Clientes" EntityType="RentaCarrosModel.View_Clientes" />
+          <EntitySet Name="View_Empleados" EntityType="RentaCarrosModel.View_Empleados" />
+          <EntitySet Name="View_Mantenimientos" EntityType="RentaCarrosModel.View_Mantenimientos" />
+          <EntitySet Name="View_Rutas" EntityType="RentaCarrosModel.View_Rutas" />
         </EntityContainer>
+        <EntityType Name="View_Clientes">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+            <PropertyRef Name="DireccionId" />
+            <PropertyRef Name="Dirección" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="ApellidoP" />
+            <PropertyRef Name="ApellidoM" />
+            <PropertyRef Name="NumLicencia" />
+          </Key>
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="DireccionId" Type="Int32" Nullable="false" />
+          <Property Name="Dirección" Type="String" Nullable="false" MaxLength="244" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumLicencia" Type="Int32" Nullable="false" />
+          <Property Name="FechaVencimientoLicencia" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="View_Empleados">
+          <Key>
+            <PropertyRef Name="EmpleadoId" />
+            <PropertyRef Name="DireccionId" />
+            <PropertyRef Name="Dirección" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="ApellidoP" />
+            <PropertyRef Name="ApellidoM" />
+            <PropertyRef Name="Salario" />
+            <PropertyRef Name="Puesto" />
+          </Key>
+          <Property Name="EmpleadoId" Type="Int32" Nullable="false" />
+          <Property Name="DireccionId" Type="Int32" Nullable="false" />
+          <Property Name="Dirección" Type="String" Nullable="false" MaxLength="244" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoM" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Salario" Type="Double" Nullable="false" />
+          <Property Name="Puesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_Mantenimientos">
+          <Key>
+            <PropertyRef Name="MantenimientoId" />
+            <PropertyRef Name="VehiculoId" />
+            <PropertyRef Name="Vehiculo" />
+            <PropertyRef Name="Nota" />
+            <PropertyRef Name="Fecha" />
+          </Key>
+          <Property Name="MantenimientoId" Type="Int32" Nullable="false" />
+          <Property Name="VehiculoId" Type="Int32" Nullable="false" />
+          <Property Name="Vehiculo" Type="String" Nullable="false" MaxLength="85" FixedLength="false" Unicode="false" />
+          <Property Name="Nota" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="View_Rutas">
+          <Key>
+            <PropertyRef Name="RentaId" />
+            <PropertyRef Name="VehiculoId" />
+            <PropertyRef Name="Vehiculo" />
+            <PropertyRef Name="ClienteId" />
+            <PropertyRef Name="Cliente_Nombre" />
+            <PropertyRef Name="EmpleadoId" />
+            <PropertyRef Name="Empleado_Nombre" />
+            <PropertyRef Name="Costo" />
+            <PropertyRef Name="FechaRenta" />
+            <PropertyRef Name="FechaRentaFin" />
+          </Key>
+          <Property Name="RentaId" Type="Int32" Nullable="false" />
+          <Property Name="VehiculoId" Type="Int32" Nullable="false" />
+          <Property Name="Vehiculo" Type="String" Nullable="false" MaxLength="85" FixedLength="false" Unicode="false" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="Cliente_Nombre" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="EmpleadoId" Type="Int32" Nullable="false" />
+          <Property Name="Empleado_Nombre" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="false" />
+          <Property Name="Costo" Type="Double" Nullable="false" />
+          <Property Name="FechaRenta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaRentaFin" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -449,6 +664,62 @@
                 <ScalarProperty Name="Modelo" ColumnName="Modelo" />
                 <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
                 <ScalarProperty Name="Kilometraje" ColumnName="Kilometraje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Clientes">
+            <EntityTypeMapping TypeName="RentaCarrosModel.View_Clientes">
+              <MappingFragment StoreEntitySet="View_Clientes">
+                <ScalarProperty Name="FechaVencimientoLicencia" ColumnName="FechaVencimientoLicencia" />
+                <ScalarProperty Name="NumLicencia" ColumnName="NumLicencia" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+                <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Dirección" ColumnName="Dirección" />
+                <ScalarProperty Name="DireccionId" ColumnName="DireccionId" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Empleados">
+            <EntityTypeMapping TypeName="RentaCarrosModel.View_Empleados">
+              <MappingFragment StoreEntitySet="View_Empleados">
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+                <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Dirección" ColumnName="Dirección" />
+                <ScalarProperty Name="DireccionId" ColumnName="DireccionId" />
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Mantenimientos">
+            <EntityTypeMapping TypeName="RentaCarrosModel.View_Mantenimientos">
+              <MappingFragment StoreEntitySet="View_Mantenimientos">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="Vehiculo" ColumnName="Vehiculo" />
+                <ScalarProperty Name="VehiculoId" ColumnName="VehiculoId" />
+                <ScalarProperty Name="MantenimientoId" ColumnName="MantenimientoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Rutas">
+            <EntityTypeMapping TypeName="RentaCarrosModel.View_Rutas">
+              <MappingFragment StoreEntitySet="View_Rutas">
+                <ScalarProperty Name="FechaRentaFin" ColumnName="FechaRentaFin" />
+                <ScalarProperty Name="FechaRenta" ColumnName="FechaRenta" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Empleado_Nombre" ColumnName="Empleado_Nombre" />
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+                <ScalarProperty Name="Cliente_Nombre" ColumnName="Cliente_Nombre" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="Vehiculo" ColumnName="Vehiculo" />
+                <ScalarProperty Name="VehiculoId" ColumnName="VehiculoId" />
+                <ScalarProperty Name="RentaId" ColumnName="RentaId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
