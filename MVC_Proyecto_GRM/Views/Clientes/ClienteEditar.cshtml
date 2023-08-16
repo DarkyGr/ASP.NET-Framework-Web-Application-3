@@ -1,0 +1,50 @@
+﻿@model MVC_Proyecto_GRM.Models.Clientes
+
+<h2 class="text-center">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("ClienteEditar", "Clientes", FormMethod.Post))    // Metodo, Controller, Post Method
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.ClienteId)
+            <div>
+                @Html.LabelFor(d => d.DireccionId)
+                @Html.TextBoxFor(d => d.DireccionId, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.DireccionId, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Nombre)
+                @Html.TextBoxFor(d => d.Nombre, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Nombre, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.ApellidoP)
+                @Html.TextBoxFor(d => d.ApellidoP, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.ApellidoP, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.ApellidoM)
+                @Html.TextBoxFor(d => d.ApellidoM, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.ApellidoM, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Telefono)
+                @Html.TextBoxFor(d => d.Telefono, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Telefono, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.NumLicencia)
+                @Html.TextBoxFor(d => d.NumLicencia, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.NumLicencia, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.FechaVencimientoLicencia)
+                @Html.TextBoxFor(d => d.FechaVencimientoLicencia, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.FechaVencimientoLicencia, "", new { @class = "red" })
+            </div>
+            <div style="text-align: right;">
+                <input value="Guardar" class="btn btn-success" type="submit" />
+            </div>
+        </div>
+    </div>
+}

@@ -16,27 +16,32 @@
         <table class="table table-striped table-bordered">
 
             <tr class="bg-warning text-center">
-                <th style="width: 15%;">ID Cliente</th>
-                <th>ID Dirección</th>
+                <th style="width: 10%;">ID Cliente</th>
+                <th style="width: 15%;">Dirección</th>
                 <th>Nombre</th>
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>
                 <th>Teléfono</th>
                 <th>Número de Licencia</th>
                 <th>Fecha Vencimiento Licencia</th>
+                <th style="width: 10%;">Acciones</th>
             </tr>
 
             @foreach (var Elemento in Model)
             {
                 <tr class="text-center">
                     <td>@Elemento.ClienteId</td>
-                    <td>@Elemento.DireccionId</td>
+                    <td>@Elemento.Dirección</td>
                     <td>@Elemento.Nombre</td>
                     <td>@Elemento.ApellidoP</td>
                     <td>@Elemento.ApellidoM</td>
                     <td>@Elemento.Telefono</td>
                     <td>@Elemento.NumLicencia</td>
                     <td>@Elemento.FechaVencimientoLicencia</td>
+                    <td>
+                        <a class="btn btn-warning" href="~/Clientes/ClienteEditar/@Elemento.ClienteId"><i class="fa-solid fa-pen-to-square"></i></a><br />
+                        <a class="btn btn-danger" href="~/Clientes/ClienteEliminar/@Elemento.ClienteId"><i class="fa-solid fa-trash"></i></a>
+                    </td>
                 </tr>
             }
 
