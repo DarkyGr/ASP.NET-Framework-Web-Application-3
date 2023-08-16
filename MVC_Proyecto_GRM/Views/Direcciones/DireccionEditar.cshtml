@@ -1,0 +1,50 @@
+﻿@model MVC_Proyecto_GRM.Models.Direcciones
+
+<h2 class="text-center">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("DireccionEditar", "Direcciones", FormMethod.Post))    // Metodo, Controller, Post Method
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.DireccionId)
+            <div>
+                @Html.LabelFor(d => d.Calle)
+                @Html.TextBoxFor(d => d.Calle, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Calle, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Numero)
+                @Html.TextBoxFor(d => d.Numero, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Numero, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Colonia)
+                @Html.TextBoxFor(d => d.Colonia, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Colonia, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.CP)
+                @Html.TextBoxFor(d => d.CP, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.CP, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Municipio)
+                @Html.TextBoxFor(d => d.Municipio, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Municipio, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Ciudad)
+                @Html.TextBoxFor(d => d.Ciudad, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Ciudad, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Estado)
+                @Html.TextBoxFor(d => d.Estado, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Estado, "", new { @class = "red" })
+            </div>
+            <div style="text-align: right;">
+                <input value="Guardar" class="btn btn-success" type="submit" />
+            </div>
+        </div>
+    </div>
+}

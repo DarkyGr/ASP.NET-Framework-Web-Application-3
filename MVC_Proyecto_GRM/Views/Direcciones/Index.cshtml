@@ -24,6 +24,7 @@
                 <th>Municpio</th>
                 <th>Ciudad</th>
                 <th>Estado</th>
+                <th>Acciones</th>
             </tr>
 
             @foreach (var Elemento in Model)
@@ -37,6 +38,10 @@
                     <td>@Elemento.Municipio</td>
                     <td>@Elemento.Ciudad</td>
                     <td>@Elemento.Estado</td>
+                    <td>
+                        <a class="btn btn-warning" href="~/Direcciones/DireccionEditar/@Elemento.DireccionId"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger" href="~/Direcciones/DireccionEliminar/@Elemento.DireccionId"><i class="fa-solid fa-trash"></i></a>
+                    </td>
                 </tr>
             }
 
