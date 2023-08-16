@@ -22,6 +22,7 @@
                 <th>Modelo</th>
                 <th>Capacidad</th>
                 <th>Kilometraje</th>
+                <th>Acciones</th>
             </tr>
 
             @foreach (var Elemento in Model)
@@ -33,6 +34,10 @@
                     <td>@Elemento.Modelo</td>
                     <td>@Elemento.Capacidad</td>
                     <td>@Elemento.Kilometraje</td>
+                    <td>
+                        <a class="btn btn-warning" href="~/Vehiculos/VehiculoEditar/@Elemento.VehiculoId"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger" href="~/Vehiculos/VehiculoEliminar/@Elemento.VehiculoId"><i class="fa-solid fa-trash"></i></a>
+                    </td>
                 </tr>
             }
 
