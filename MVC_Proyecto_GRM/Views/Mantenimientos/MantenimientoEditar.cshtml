@@ -1,0 +1,30 @@
+﻿@model MVC_Proyecto_GRM.Models.Mantenimientos
+
+<h2 class="text-center">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("MantenimientoAgregar", "Mantenimientos", FormMethod.Post))    // Metodo, Controller, Post Method
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(d => d.MantenimientoId)
+            <div>
+                @Html.LabelFor(d => d.VehiculoId)
+                @Html.TextBoxFor(d => d.VehiculoId, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.VehiculoId, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Nota)
+                @Html.TextBoxFor(d => d.Nota, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Nota, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Fecha)
+                @Html.TextBoxFor(d => d.Fecha, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Fecha, "", new { @class = "red" })
+            </div>
+            <div style="text-align: right;">
+                <input value="Guardar" class="btn btn-success" type="submit" />
+            </div>
+        </div>
+    </div>
+}

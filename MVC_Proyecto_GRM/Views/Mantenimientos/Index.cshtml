@@ -20,6 +20,7 @@
                 <th>ID Vehículo</th>
                 <th>Nota</th>
                 <th>Fecha</th>
+                <th>Acciones</th>
             </tr>
 
             @foreach (var Elemento in Model)
@@ -29,6 +30,10 @@
                     <td>@Elemento.VehiculoId</td>
                     <td>@Elemento.Nota</td>
                     <td>@Elemento.Fecha</td>
+                    <td>
+                        <a class="btn btn-warning" href="~/Mantenimientos/MantenimientoEditar/@Elemento.MantenimientoId"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger" href="~/Mantenimientos/MantenimientoEliminar/@Elemento.MantenimientoId"><i class="fa-solid fa-trash"></i></a>
+                    </td>
                 </tr>
             }
 
