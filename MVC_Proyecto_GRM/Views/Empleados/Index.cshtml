@@ -23,6 +23,7 @@
                 <th>Apellido Materno</th>
                 <th>Salario</th>
                 <th>Puesto</th>
+                <th>Acciones</th>
             </tr>
 
             @foreach (var Elemento in Model)
@@ -35,6 +36,10 @@
                     <td>@Elemento.ApellidoM</td>
                     <td>@Elemento.Salario</td>
                     <td>@Elemento.Puesto</td>
+                    <td>
+                        <a class="btn btn-warning" href="~/Empleados/EmpleadoEditar/@Elemento.EmpleadoId"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger" href="~/Empleados/EmpleadoEliminar/@Elemento.EmpleadoId"><i class="fa-solid fa-trash"></i></a>
+                    </td>
                 </tr>
             }
 
