@@ -26,5 +26,10 @@ namespace MVC_Proyecto_GRM.Controllers
 
             return View();
         }
+
+        public ActionResult Plantilla()
+        {
+            return View();
+        }
     }
 }
