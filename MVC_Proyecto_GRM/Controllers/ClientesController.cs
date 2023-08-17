@@ -7,11 +7,14 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_Proyecto_GRM.Models.ViewModels.Clientes;
 using static MVC_Proyecto_GRM.Models.Enum;
+using MVC_Proyecto_GRM.Models.ViewModels.Rentas;
+using MVC_Proyecto_GRM.Models.DDLs;
 
 namespace MVC_Proyecto_GRM.Controllers
 {
     public class ClientesController : Controller
     {
+        // ********************** Metodo Sencillo APROBADO *********************** 
         // GET: Clientes
         public ActionResult Index()
         {
@@ -21,18 +24,19 @@ namespace MVC_Proyecto_GRM.Controllers
             using (RentaCarrosEntities db = new RentaCarrosEntities())
             {
                 // LinQ
-                lista = (from vc in db.View_Clientes
+                lista = (from c in db.Clientes
+                         join direc in db.Direcciones on c.DireccionId equals direc.DireccionId
                          select new ClientesListar
                          {
-                             ClienteId = vc.ClienteId,
-                             DireccionId = vc.DireccionId,
-                             Dirección = vc.Dirección,
-                             Nombre = vc.Nombre,
-                             ApellidoP = vc.ApellidoP,
-                             ApellidoM = vc.ApellidoM,
-                             Telefono = vc.Telefono,
-                             NumLicencia = vc.NumLicencia,
-                             FechaVencimientoLicencia = vc.FechaVencimientoLicencia,
+                             ClienteId = c.ClienteId,
+                             DireccionId = c.DireccionId,
+                             Dirección = "Calle " + direc.Calle + " #" + direc.Numero + " Col. " + direc.Colonia + " C.P. " + direc.CP,
+                             Nombre = c.Nombre,
+                             ApellidoP = c.ApellidoP,
+                             ApellidoM = c.ApellidoM,
+                             Telefono = c.Telefono,
+                             NumLicencia = c.NumLicencia,
+                             FechaVencimientoLicencia = c.FechaVencimientoLicencia,
                          }).ToList();
             }
 
@@ -41,6 +45,8 @@ namespace MVC_Proyecto_GRM.Controllers
 
         public ActionResult ClienteAgregar()
         {
+            CargarDDL();
+
             return View();
         }
 
@@ -50,11 +56,11 @@ namespace MVC_Proyecto_GRM.Controllers
             try
             {
                 // Validar si modelo es correcto
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && model.DireccionId != 0)
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
-                        var cliente = new Clientes();
+                        var cliente = new Clientes();                        
 
                         cliente.DireccionId = model.DireccionId;
                         cliente.Nombre = model.Nombre;
@@ -74,18 +80,21 @@ namespace MVC_Proyecto_GRM.Controllers
                     return Redirect("~/Clientes");
                 }
                 Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
             }
             catch (Exception ex)
             {
-                Alert("Error: " + ex.Message, NoticationType.error);
+                Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
             }
         }
 
         public ActionResult ClienteEditar(int id)
-        {
+        {            
             Clientes cliente = new Clientes();
+            CargarDDL();
 
             using (RentaCarrosEntities db = new RentaCarrosEntities())
             {
@@ -94,7 +103,6 @@ namespace MVC_Proyecto_GRM.Controllers
             }
 
             ViewBag.Title = "Editando cliente con ID: " + cliente.ClienteId;
-
             return View(cliente);
         }
 
@@ -104,7 +112,7 @@ namespace MVC_Proyecto_GRM.Controllers
             try
             {
                 // Validar si modelo es correcto
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && model.DireccionId != 0)
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
@@ -129,13 +137,14 @@ namespace MVC_Proyecto_GRM.Controllers
                     return Redirect("~/Clientes");
                 }
                 Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
             }
             catch (Exception ex)
             {
-                Alert("Error: " + ex.Message, NoticationType.error);
+                Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
-                //throw new Exception(ex.Message);
             }
         }
 
@@ -161,12 +170,35 @@ namespace MVC_Proyecto_GRM.Controllers
             }
         }
 
+
+        // ********************** Metodos APROVADOS *********************** 
+        
         public void Alert(string message, NoticationType noticationType)
         {
             var msg = "<script language='javascript'>Swal.fire('" + noticationType.ToString().ToUpper() + "', '" + message +
                 "','" + noticationType + "')" + "</script>";
 
             TempData["notification"] = msg;
+        }
+
+        public void CargarDDL()
+        {
+            List<DireccionesDDL> listaD = new List<DireccionesDDL>();
+            listaD.Insert(0, new DireccionesDDL { DireccionId = 0, Direccion = "Seleccione una dirección." });
+
+            using (RentaCarrosEntities db = new RentaCarrosEntities())
+            {
+                foreach (var d in db.Direcciones)
+                {
+                    DireccionesDDL aux = new DireccionesDDL();
+                    aux.DireccionId = d.DireccionId;
+                    aux.Direccion = "Calle " + d.Calle + " #" + d.Numero + " Col. " + d.Colonia + " C.P. " + d.CP;
+
+                    listaD.Add(aux);
+                }
+            }
+
+            ViewBag.ListaDirecciones = listaD;
         }
     }
 }

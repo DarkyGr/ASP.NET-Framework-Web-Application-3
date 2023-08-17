@@ -12,7 +12,7 @@ namespace MVC_Proyecto_GRM.Models.ViewModels.Clientes
         public int ClienteId { get; set; }
 
         [Required]  // Data validator
-        [Display(Name = "ID Dirección")]   // Manda el name de lo que falta
+        [Display(Name = "Dirección")]   // Manda el name de lo que falta
         public int DireccionId { get; set; }
 
         [Required]  // Data validator
@@ -37,6 +37,7 @@ namespace MVC_Proyecto_GRM.Models.ViewModels.Clientes
 
         [Required]  // Data validator
         [Display(Name = "Fecha de Vencimiento de la Licencia")]   // Manda el name de lo que falta
+        [DataType(DataType.Date)]
         public DateTime FechaVencimientoLicencia { get; set; }
     }
 }

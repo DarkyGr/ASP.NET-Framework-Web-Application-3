@@ -11,7 +11,8 @@ namespace MVC_Proyecto_GRM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Clientes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,12 +22,34 @@ namespace MVC_Proyecto_GRM.Models
         }
     
         public int ClienteId { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Dirección")]   // Manda el name de lo que falta
         public int DireccionId { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Nombre")]   // Manda el name de lo que falta
         public string Nombre { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Apellido Paterno")]   // Manda el name de lo que falta
         public string ApellidoP { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Apellido Materno")]   // Manda el name de lo que falta
         public string ApellidoM { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Teléfono")]   // Manda el name de lo que falta
         public string Telefono { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Número de Licencia")]   // Manda el name de lo que falta
         public int NumLicencia { get; set; }
+        
+        [Required]
+        [Display(Name = "Fecha de Vencimiento de la Licencia")]   // Manda el name de lo que falta
+        //[DataType(DataType.Date)]
         public Nullable<System.DateTime> FechaVencimientoLicencia { get; set; }
     
         public virtual Direcciones Direcciones { get; set; }
