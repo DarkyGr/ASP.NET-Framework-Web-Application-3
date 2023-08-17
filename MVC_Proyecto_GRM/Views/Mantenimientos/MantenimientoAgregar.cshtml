@@ -10,18 +10,17 @@
     <div class="row">
         <div class="col-md-12">
             <div>
-                @Html.LabelFor(d => d.VehiculoId)
-                @Html.TextBoxFor(d => d.VehiculoId, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.VehiculoId, "", new { @class = "red" })
+                @Html.Label("Vehículo", null, new { @class = "lblTitulo" })
+                @Html.DropDownListFor(d => d.VehiculoId, new SelectList(ViewBag.ListaVehiculos, "VehiculoId", "Info"), new { @class = "form-control" })
             </div>
             <div>
-                @Html.LabelFor(d => d.Nota)
+                @Html.LabelFor(d => d.Nota, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Nota, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Nota, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.Fecha)
-                @Html.TextBoxFor(d => d.Fecha, "", new { @class = "form-control" })
+                @Html.LabelFor(d => d.Fecha, null, new { @class = "lblTitulo" })<br />
+                @Html.EditorFor(d => d.Fecha, "", new { @class = "date" })
                 @Html.ValidationMessageFor(d => d.Fecha, "", new { @class = "red" })
             </div>
             <div style="text-align: right;">

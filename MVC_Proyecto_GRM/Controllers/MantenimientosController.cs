@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_Proyecto_GRM.Models.ViewModels.Mantenimientos;
 using static MVC_Proyecto_GRM.Models.Enum;
+using MVC_Proyecto_GRM.Models.ViewModels.Clientes;
+using MVC_Proyecto_GRM.Models.DDLs;
 
 namespace MVC_Proyecto_GRM.Controllers
 {
@@ -21,13 +23,15 @@ namespace MVC_Proyecto_GRM.Controllers
             using (RentaCarrosEntities db = new RentaCarrosEntities())
             {
                 // LinQ
-                lista = (from manteni in db.Mantenimientos
+                lista = (from c in db.Mantenimientos
+                         join ve in db.Vehiculos on c.VehiculoId equals ve.VehiculoId
                          select new MantenimientosListar
                          {
-                             MantenimientoId =  manteni.MantenimientoId,
-                             VehiculoId = manteni.VehiculoId,
-                             Nota = manteni.Nota,
-                             Fecha = manteni.Fecha,
+                             MantenimientoId = c.MantenimientoId,
+                             VehiculoId = c.VehiculoId,
+                             Vehiculo = "Marca: " + ve.Marca + " Modelo: " + ve.Modelo + " Matrícula: " + ve.Matricula,
+                             Nota = c.Nota,
+                             Fecha = c.Fecha,
                          }).ToList();
             }
 
@@ -36,6 +40,8 @@ namespace MVC_Proyecto_GRM.Controllers
 
         public ActionResult MantenimientoAgregar()
         {
+            CargarDDL();
+
             return View();
         }
 
@@ -45,7 +51,7 @@ namespace MVC_Proyecto_GRM.Controllers
             try
             {
                 // Validar si modelo es correcto
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && model.VehiculoId != 0)
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
@@ -64,11 +70,13 @@ namespace MVC_Proyecto_GRM.Controllers
                     return Redirect("~/Mantenimientos");
                 }
                 Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
             }
             catch (Exception ex)
             {
                 Alert("Error: " + ex.Message, NoticationType.error);
+                CargarDDL();
                 return View(model);
             }
         }
@@ -76,6 +84,7 @@ namespace MVC_Proyecto_GRM.Controllers
         public ActionResult MantenimientoEditar(int id)
         {
             Mantenimientos mantenimiento = new Mantenimientos();
+            CargarDDL();
 
             using (RentaCarrosEntities db = new RentaCarrosEntities())
             {
@@ -94,7 +103,7 @@ namespace MVC_Proyecto_GRM.Controllers
             try
             {
                 // Validar si modelo es correcto
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && model.VehiculoId != 0)
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
@@ -115,11 +124,13 @@ namespace MVC_Proyecto_GRM.Controllers
                     return Redirect("~/Mantenimientos");
                 }
                 Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
             }
             catch (Exception ex)
             {
                 Alert("Error: " + ex.Message, NoticationType.error);
+                CargarDDL();
                 return View(model);
                 //throw new Exception(ex.Message);
             }
@@ -155,5 +166,24 @@ namespace MVC_Proyecto_GRM.Controllers
             TempData["notification"] = msg;
         }
 
+        public void CargarDDL()
+        {
+            List<VehiculosDDL> listaV = new List<VehiculosDDL>();
+            listaV.Insert(0, new VehiculosDDL { VehiculoId = 0, Info = "Seleccione un vehículo." });
+
+            using (RentaCarrosEntities db = new RentaCarrosEntities())
+            {
+                foreach (var d in db.Vehiculos)
+                {
+                    VehiculosDDL aux = new VehiculosDDL();
+                    aux.VehiculoId = d.VehiculoId;
+                    aux.Info = "Marca: " + d.Marca + " Modelo: " + d.Modelo + " Matrícula: " + d.Matricula;
+
+                    listaV.Add(aux);
+                }
+            }
+
+            ViewBag.ListaVehiculos = listaV;
+        }
     }
 }

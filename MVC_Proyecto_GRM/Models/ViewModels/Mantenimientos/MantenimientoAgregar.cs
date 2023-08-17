@@ -21,6 +21,7 @@ namespace MVC_Proyecto_GRM.Models.ViewModels.Mantenimientos
 
         [Required]  // Data validator
         [Display(Name = "Fecha")]   // Manda el name de lo que falta
+        [DataType(DataType.Date)]
         public DateTime Fecha { get; set; }
     }
 }

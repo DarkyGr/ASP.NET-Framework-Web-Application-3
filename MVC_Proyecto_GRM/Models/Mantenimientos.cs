@@ -11,12 +11,23 @@ namespace MVC_Proyecto_GRM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Mantenimientos
     {
         public int MantenimientoId { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Vehículo")]   // Manda el name de lo que falta
         public int VehiculoId { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Nota")]   // Manda el name de lo que falta
         public string Nota { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Fecha")]   // Manda el name de lo que falta
+        //[DataType(DataType.Date)]
         public System.DateTime Fecha { get; set; }
     
         public virtual Vehiculos Vehiculos { get; set; }

@@ -10,7 +10,8 @@ namespace MVC_Proyecto_GRM.Models.ViewModels.Mantenimientos
     public class MantenimientosListar
     {
         public int MantenimientoId { get; set; }        
-        public int VehiculoId { get; set; }        
+        public int VehiculoId { get; set; }
+        public string Vehiculo { get; set; }
         public string Nota { get; set; }        
         public DateTime Fecha { get; set; }
     }
