@@ -8,37 +8,37 @@
         <div class="col-md-12">
             @Html.HiddenFor(d => d.DireccionId)
             <div>
-                @Html.LabelFor(d => d.Calle)
+                @Html.LabelFor(d => d.Calle, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Calle, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Calle, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.Numero)
+                @Html.LabelFor(d => d.Numero, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Numero, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Numero, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.Colonia)
+                @Html.LabelFor(d => d.Colonia, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Colonia, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Colonia, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.CP)
+                @Html.LabelFor(d => d.CP, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.CP, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.CP, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.Municipio)
+                @Html.LabelFor(d => d.Municipio, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Municipio, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Municipio, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.Ciudad)
+                @Html.LabelFor(d => d.Ciudad, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Ciudad, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Ciudad, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.Estado)
+                @Html.LabelFor(d => d.Estado, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Estado, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Estado, "", new { @class = "red" })
             </div>

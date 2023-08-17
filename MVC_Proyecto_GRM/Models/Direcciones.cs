@@ -11,7 +11,8 @@ namespace MVC_Proyecto_GRM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Direcciones
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,12 +23,33 @@ namespace MVC_Proyecto_GRM.Models
         }
     
         public int DireccionId { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Calle")]   // Manda el name de lo que falta
         public string Calle { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Numero")]   // Manda el name de lo que falta
         public Nullable<int> Numero { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Colonia")]   // Manda el name de lo que falta
         public string Colonia { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "CP")]   // Manda el name de lo que falta
         public int CP { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Municipio")]   // Manda el name de lo que falta
         public string Municipio { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Ciudad")]   // Manda el name de lo que falta
         public string Ciudad { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Estado")]   // Manda el name de lo que falta
         public string Estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
