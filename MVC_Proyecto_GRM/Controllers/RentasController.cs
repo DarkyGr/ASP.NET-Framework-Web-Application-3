@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_Proyecto_GRM.Models.ViewModels.Rentas;
 using static MVC_Proyecto_GRM.Models.Enum;
+using MVC_Proyecto_GRM.Models.ViewModels.Clientes;
+using MVC_Proyecto_GRM.Models.DDLs;
 
 namespace MVC_Proyecto_GRM.Controllers
 {
@@ -21,16 +23,22 @@ namespace MVC_Proyecto_GRM.Controllers
             using (RentaCarrosEntities db = new RentaCarrosEntities())
             {
                 // LinQ
-                lista = (from renta in db.Rentas
+                lista = (from r in db.Rentas
+                         join v in db.Vehiculos on r.VehiculoId equals v.VehiculoId
+                         join c in db.Clientes on r.ClienteId equals c.ClienteId
+                         join e in db.Empleados on r.EmpleadoId equals e.EmpleadoId
                          select new RentasListar
                          {
-                             RentaId = renta.RentaId,
-                             VehiculoId = renta.VehiculoId,
-                             ClienteId = renta.ClienteId,
-                             EmpleadoId = renta.EmpleadoId,
-                             Costo = (float)renta.Costo,
-                             FechaRenta = renta.FechaRenta,
-                             FechaRentaFin = renta.FechaRentaFin,
+                             RentaId = r.RentaId,
+                             VehiculoId = r.VehiculoId,
+                             Vehiculo = "Marca: " + v.Marca + " Modelo: " + v.Modelo + " Matrícula " + v.Matricula,
+                             ClienteId = r.ClienteId,
+                             Cliente = c.Nombre + " " + c.ApellidoP + " " + c.ApellidoM,
+                             EmpleadoId = r.EmpleadoId,
+                             Empleado = e.Nombre + " " + e.ApellidoP + " " + e.ApellidoM,
+                             Costo = (float)r.Costo,
+                             FechaRenta = r.FechaRenta,
+                             FechaRentaFin = r.FechaRentaFin
                          }).ToList();
             }
 
@@ -39,6 +47,7 @@ namespace MVC_Proyecto_GRM.Controllers
 
         public ActionResult RentaAgregar()
         {
+            CargarDDL();
             return View();
         }
 
@@ -48,7 +57,7 @@ namespace MVC_Proyecto_GRM.Controllers
             try
             {
                 // Validar si modelo es correcto
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && model.VehiculoId != 0 && model.ClienteId != 0 && model.EmpleadoId != 0)
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
@@ -70,11 +79,13 @@ namespace MVC_Proyecto_GRM.Controllers
                     return Redirect("~/Rentas");
                 }
                 Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
             }
             catch (Exception ex)
             {
-                Alert("Error: " + ex.Message, NoticationType.error);
+                Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
             }
         }
@@ -82,6 +93,7 @@ namespace MVC_Proyecto_GRM.Controllers
         public ActionResult RentaEditar(int id)
         {
             Rentas renta = new Rentas();
+            CargarDDL();
 
             using (RentaCarrosEntities db = new RentaCarrosEntities())
             {
@@ -100,7 +112,7 @@ namespace MVC_Proyecto_GRM.Controllers
             try
             {
                 // Validar si modelo es correcto
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && model.VehiculoId != 0 && model.ClienteId != 0 && model.EmpleadoId != 0)
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
@@ -124,13 +136,14 @@ namespace MVC_Proyecto_GRM.Controllers
                     return Redirect("~/Rentas");
                 }
                 Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
             }
             catch (Exception ex)
             {
-                Alert("Error: " + ex.Message, NoticationType.error);
+                Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
-                //throw new Exception(ex.Message);
             }
         }
 
@@ -162,6 +175,52 @@ namespace MVC_Proyecto_GRM.Controllers
                 "','" + noticationType + "')" + "</script>";
 
             TempData["notification"] = msg;
+        }
+
+        public void CargarDDL()
+        {
+            List<VehiculosDDL> listaV = new List<VehiculosDDL>();
+            listaV.Insert(0, new VehiculosDDL { VehiculoId = 0, Info = "Seleccione un vehículo." });
+
+            List<ClientesDDL> listaC = new List<ClientesDDL>();
+            listaC.Insert(0, new ClientesDDL { ClienteId = 0, Nombre = "Seleccione un cliente." });
+
+            List<EmpleadosDDL> listaE = new List<EmpleadosDDL>();
+            listaE.Insert(0, new EmpleadosDDL { EmpleadoId = 0, Nombre = "Seleccione un empleado." });
+
+            using (RentaCarrosEntities db = new RentaCarrosEntities())
+            {
+                foreach (var v in db.Vehiculos)
+                {
+                    VehiculosDDL aux = new VehiculosDDL();
+                    aux.VehiculoId = v.VehiculoId;
+                    aux.Info = "Marca: " + v.Marca + " Modelo: " + v.Modelo + " Matrícula " + v.Matricula;
+
+                    listaV.Add(aux);
+                }
+
+                foreach (var c in db.Clientes)
+                {
+                    ClientesDDL aux = new ClientesDDL();
+                    aux.ClienteId = c.ClienteId;
+                    aux.Nombre = c.Nombre + " " + c.ApellidoP + " " + c.ApellidoM;
+
+                    listaC.Add(aux);
+                }
+
+                foreach (var e in db.Empleados)
+                {
+                    EmpleadosDDL aux = new EmpleadosDDL();
+                    aux.EmpleadoId = e.EmpleadoId;
+                    aux.Nombre = e.Nombre + " " + e.ApellidoP + " " + e.ApellidoM;
+
+                    listaE.Add(aux);
+                }
+            }
+
+            ViewBag.ListaVehiculos = listaV;
+            ViewBag.ListaClientes = listaC;
+            ViewBag.ListaEmpleados = listaE;
         }
     }
 }

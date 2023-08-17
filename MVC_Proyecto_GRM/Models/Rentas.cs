@@ -11,15 +11,36 @@ namespace MVC_Proyecto_GRM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Rentas
     {
         public int RentaId { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Vehículo")]   // Manda el name de lo que falta
         public int VehiculoId { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Cliente")]   // Manda el name de lo que falta
         public int ClienteId { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Empleado")]   // Manda el name de lo que falta
         public int EmpleadoId { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Costo")]   // Manda el name de lo que falta
         public double Costo { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Fecha Renta")]   // Manda el name de lo que falta
+        //[DataType(DataType.Date)]
         public System.DateTime FechaRenta { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Fecha Renta Fin")]   // Manda el name de lo que falta
+        //[DataType(DataType.Date)]
         public System.DateTime FechaRentaFin { get; set; }
     
         public virtual Clientes Clientes { get; set; }

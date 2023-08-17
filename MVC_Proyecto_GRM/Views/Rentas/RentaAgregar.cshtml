@@ -8,35 +8,32 @@
 @using (Html.BeginForm("RentaAgregar", "Rentas", FormMethod.Post))    // Metodo, Controller, Post Method
 {
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12">            
             <div>
-                @Html.LabelFor(d => d.VehiculoId)
-                @Html.TextBoxFor(d => d.VehiculoId, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.VehiculoId, "", new { @class = "red" })
+                @Html.Label("Vehículo", null, new { @class = "lblTitulo" })
+                @Html.DropDownListFor(d => d.VehiculoId, new SelectList(ViewBag.ListaVehiculos, "VehiculoId", "Info"), new { @class = "form-control" })
             </div>
             <div>
-                @Html.LabelFor(d => d.ClienteId)
-                @Html.TextBoxFor(d => d.ClienteId, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.ClienteId, "", new { @class = "red" })
+                @Html.Label("Cliente", null, new { @class = "lblTitulo" })
+                @Html.DropDownListFor(d => d.ClienteId, new SelectList(ViewBag.ListaClientes, "ClienteId", "Nombre"), new { @class = "form-control" })
             </div>
             <div>
-                @Html.LabelFor(d => d.EmpleadoId)
-                @Html.TextBoxFor(d => d.EmpleadoId, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.EmpleadoId, "", new { @class = "red" })
+                @Html.Label("Empleado", null, new { @class = "lblTitulo" })
+                @Html.DropDownListFor(d => d.EmpleadoId, new SelectList(ViewBag.ListaEmpleados, "EmpleadoId", "Nombre"), new { @class = "form-control" })
             </div>
             <div>
-                @Html.LabelFor(d => d.Costo)
+                @Html.LabelFor(d => d.Costo, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Costo, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Costo, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.FechaRenta)
-                @Html.TextBoxFor(d => d.FechaRenta, "", new { @class = "form-control" })
+                @Html.LabelFor(d => d.FechaRenta, null, new { @class = "lblTitulo" })<br />
+                @Html.EditorFor(d => d.FechaRenta, "", new { @class = "date" })
                 @Html.ValidationMessageFor(d => d.FechaRenta, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.FechaRentaFin)
-                @Html.TextBoxFor(d => d.FechaRentaFin, "", new { @class = "form-control" })
+                @Html.LabelFor(d => d.FechaRentaFin, null, new { @class = "lblTitulo" })<br />
+                @Html.EditorFor(d => d.FechaRentaFin, "", new { @class = "date" })
                 @Html.ValidationMessageFor(d => d.FechaRentaFin, "", new { @class = "red" })
             </div>
             <div style="text-align: right;">

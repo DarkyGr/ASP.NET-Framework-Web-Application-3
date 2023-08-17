@@ -12,15 +12,15 @@ namespace MVC_Proyecto_GRM.Models.ViewModels.Rentas
         public int RentaId { get; set; }
 
         [Required]  // Data validator
-        [Display(Name = "ID Vehiculo")]   // Manda el name de lo que falta
+        [Display(Name = "Vehiculo")]   // Manda el name de lo que falta
         public int VehiculoId { get; set; }
 
         [Required]  // Data validator
-        [Display(Name = "ID Cliente")]   // Manda el name de lo que falta
+        [Display(Name = "Cliente")]   // Manda el name de lo que falta
         public int ClienteId { get; set; }
 
         [Required]  // Data validator
-        [Display(Name = "ID Empleado")]   // Manda el name de lo que falta
+        [Display(Name = "Empleado")]   // Manda el name de lo que falta
         public int EmpleadoId { get; set; }
 
         [Required]  // Data validator
@@ -29,10 +29,12 @@ namespace MVC_Proyecto_GRM.Models.ViewModels.Rentas
 
         [Required]  // Data validator
         [Display(Name = "Fecha de Renta")]   // Manda el name de lo que falta
+        [DataType(DataType.Date)]
         public DateTime FechaRenta { get; set; }
 
         [Required]  // Data validator
         [Display(Name = "Fecha de Renta Fin")]   // Manda el name de lo que falta
+        [DataType(DataType.Date)]
         public DateTime FechaRentaFin { get; set; }
     }
 }
