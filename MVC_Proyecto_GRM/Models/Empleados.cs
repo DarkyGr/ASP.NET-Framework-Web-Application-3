@@ -11,7 +11,8 @@ namespace MVC_Proyecto_GRM.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Empleados
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +22,29 @@ namespace MVC_Proyecto_GRM.Models
         }
     
         public int EmpleadoId { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Direccion")]   // Manda el name de lo que falta
         public int DireccionId { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Nombre")]   // Manda el name de lo que falta
         public string Nombre { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Apellido Paterno")]   // Manda el name de lo que falta
         public string ApellidoP { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Apellido Materno")]   // Manda el name de lo que falta
         public string ApellidoM { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Salario")]   // Manda el name de lo que falta
         public double Salario { get; set; }
+
+        [Required]  // Data validator
+        [Display(Name = "Puesto")]   // Manda el name de lo que falta
         public string Puesto { get; set; }
     
         public virtual Direcciones Direcciones { get; set; }

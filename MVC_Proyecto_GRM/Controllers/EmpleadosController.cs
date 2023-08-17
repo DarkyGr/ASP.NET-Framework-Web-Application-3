@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using MVC_Proyecto_GRM.Models.ViewModels.Empleados;
 using static MVC_Proyecto_GRM.Models.Enum;
+using MVC_Proyecto_GRM.Models.ViewModels.Clientes;
+using MVC_Proyecto_GRM.Models.DDLs;
 
 namespace MVC_Proyecto_GRM.Controllers
 {
@@ -21,16 +23,18 @@ namespace MVC_Proyecto_GRM.Controllers
             using (RentaCarrosEntities db = new RentaCarrosEntities())
             {
                 // LinQ
-                lista = (from empleado in db.Empleados
+                lista = (from c in db.Empleados
+                         join direc in db.Direcciones on c.DireccionId equals direc.DireccionId
                          select new EmpleadosListar
                          {
-                             EmpleadoId = empleado.EmpleadoId,
-                             DireccionId = empleado.DireccionId,
-                             Nombre = empleado.Nombre,
-                             ApellidoP = empleado.ApellidoP,
-                             ApellidoM = empleado.ApellidoM,
-                             Salario = (float)empleado.Salario,
-                             Puesto = empleado.Puesto,
+                             EmpleadoId = c.EmpleadoId,
+                             DireccionId = c.DireccionId,
+                             Direccion = "Calle " + direc.Calle + " #" + direc.Numero + " Col. " + direc.Colonia + " C.P. " + direc.CP,
+                             Nombre = c.Nombre,
+                             ApellidoP = c.ApellidoP,
+                             ApellidoM = c.ApellidoM,
+                             Salario = (float)c.Salario,
+                             Puesto = c.Puesto,
                          }).ToList();
             }
 
@@ -39,6 +43,8 @@ namespace MVC_Proyecto_GRM.Controllers
 
         public ActionResult EmpleadoAgregar()
         {
+            CargarDDL();
+
             return View();
         }
 
@@ -48,7 +54,7 @@ namespace MVC_Proyecto_GRM.Controllers
             try
             {
                 // Validar si modelo es correcto
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && model.DireccionId != 0)
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
@@ -71,11 +77,13 @@ namespace MVC_Proyecto_GRM.Controllers
                     return Redirect("~/Empleados");
                 }
                 Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
             }
             catch (Exception ex)
             {
                 Alert("Error: " + ex.Message, NoticationType.error);
+                CargarDDL();
                 return View(model);
             }
         }
@@ -83,6 +91,7 @@ namespace MVC_Proyecto_GRM.Controllers
         public ActionResult EmpleadoEditar(int id)
         {
             Empleados empleado = new Empleados();
+            CargarDDL();
 
             using (RentaCarrosEntities db = new RentaCarrosEntities())
             {
@@ -101,7 +110,7 @@ namespace MVC_Proyecto_GRM.Controllers
             try
             {
                 // Validar si modelo es correcto
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && model.DireccionId != 0)
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
@@ -125,11 +134,13 @@ namespace MVC_Proyecto_GRM.Controllers
                     return Redirect("~/Empleados");
                 }
                 Alert("Verificar la información", NoticationType.warning);
+                CargarDDL();
                 return View(model);
             }
             catch (Exception ex)
             {
                 Alert("Error: " + ex.Message, NoticationType.error);
+                CargarDDL();
                 return View(model);
                 //throw new Exception(ex.Message);
             }
@@ -163,6 +174,26 @@ namespace MVC_Proyecto_GRM.Controllers
                 "','" + noticationType + "')" + "</script>";
 
             TempData["notification"] = msg;
+        }
+
+        public void CargarDDL()
+        {
+            List<DireccionesDDL> listaD = new List<DireccionesDDL>();
+            listaD.Insert(0, new DireccionesDDL { DireccionId = 0, Direccion = "Seleccione una dirección." });
+
+            using (RentaCarrosEntities db = new RentaCarrosEntities())
+            {
+                foreach (var d in db.Direcciones)
+                {
+                    DireccionesDDL aux = new DireccionesDDL();
+                    aux.DireccionId = d.DireccionId;
+                    aux.Direccion = "Calle " + d.Calle + " #" + d.Numero + " Col. " + d.Colonia + " C.P. " + d.CP;
+
+                    listaD.Add(aux);
+                }
+            }
+
+            ViewBag.ListaDirecciones = listaD;
         }
 
     }

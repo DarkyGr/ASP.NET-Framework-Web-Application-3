@@ -8,34 +8,33 @@
         <div class="col-md-12">
             @Html.HiddenFor(d => d.EmpleadoId)
             <div>
-                @Html.LabelFor(d => d.DireccionId)
-                @Html.TextBoxFor(d => d.DireccionId, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.DireccionId, "", new { @class = "red" })
-            </div>
-            <div>
-                @Html.LabelFor(d => d.Nombre)
+                @Html.LabelFor(d => d.Nombre, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Nombre, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Nombre, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.ApellidoP)
+                @Html.LabelFor(d => d.ApellidoP, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.ApellidoP, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.ApellidoP, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.ApellidoM)
+                @Html.LabelFor(d => d.ApellidoM, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.ApellidoM, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.ApellidoM, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.Salario)
+                @Html.LabelFor(d => d.Salario, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Salario, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Salario, "", new { @class = "red" })
             </div>
             <div>
-                @Html.LabelFor(d => d.Puesto)
+                @Html.LabelFor(d => d.Puesto, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Puesto, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Puesto, "", new { @class = "red" })
+            </div>
+            <div>
+                @Html.Label("Dirección", null, new { @class = "lblTitulo" })
+                @Html.DropDownListFor(d => d.DireccionId, new SelectList(ViewBag.ListaDirecciones, "DireccionId", "Direccion"), new { @class = "form-control" })
             </div>
             <div style="text-align: right;">
                 <input value="Guardar" class="btn btn-success" type="submit" />

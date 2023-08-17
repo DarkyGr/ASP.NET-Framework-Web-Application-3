@@ -9,6 +9,7 @@ namespace MVC_Proyecto_GRM.Models.ViewModels.Empleados
     {
         public int EmpleadoId { get; set; }
         public int DireccionId { get; set; }
+        public string Direccion { get; set; }
         public string Nombre { get; set; }
         public string ApellidoP { get; set; }
         public string ApellidoM { get; set; }
