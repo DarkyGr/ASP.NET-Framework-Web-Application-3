@@ -30,6 +30,6 @@ namespace MVC_Proyecto_GRM.Controllers
         public ActionResult Plantilla()
         {
             return View();
-        }
+        }        
     }
 }

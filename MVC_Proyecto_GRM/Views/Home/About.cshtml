@@ -1,9 +1,68 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
+﻿
+<main aria-labelledby="title">   
 
-    <p>Use this area to provide additional information.</p>
+    <div class="row">
+        <div class="presentation-1">            
+            <h2 class="text-center text-white p-md-4">Reglas de negocio y usuario</h2>
+        </div> <br /><br />
+
+        <div class="col-md-4 m-md-2">
+            @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+        </div>
+
+        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
+            <h5>Rentas</h5>
+            <ul>
+                <li>Agregar --> </li>
+                <li>Editar ----> </li>
+                <li>Eliminar -> </li>
+            </ul>
+        </div>
+
+        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
+            <h5>Clientes</h5>
+            <ul>
+                <li>Agregar --> </li>
+                <li>Editar ----> </li>
+                <li>Eliminar -> </li>
+            </ul>
+        </div>
+
+        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
+            <h5>Vehículos</h5>
+            <ul>
+                <li>Agregar --> </li>
+                <li>Editar ----> </li>
+                <li>Eliminar -> </li>
+            </ul>
+        </div>
+
+        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
+            <h5>Empleados</h5>
+            <ul>
+                <li>Agregar --> </li>
+                <li>Editar ----> </li>
+                <li>Eliminar -> </li>
+            </ul>
+        </div>
+
+        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
+            <h5>Direcciones</h5>
+            <ul>
+                <li>Agregar --> </li>
+                <li>Editar ----> </li>
+                <li>Eliminar -> </li>
+            </ul>
+        </div>
+
+        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
+            <h5>Mantenimientos</h5>
+            <ul>
+                <li>Agregar --> </li>
+                <li>Editar ----> </li>
+                <li>Eliminar -> </li>
+            </ul>
+        </div>
+
+    </div>
 </main>

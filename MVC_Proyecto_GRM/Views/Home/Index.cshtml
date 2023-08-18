@@ -2,17 +2,99 @@
     ViewBag.Title = "Renta de Carros";
 }
 
-<main>
-    <!--========================================================== -->
-    <!-- PRESENTATION -->
-    <!--========================================================== -->
-    <section class="presentation d-flex justify-content-center align-items-center m-auto">
-        <p class="welcome text-center mb-4" id="typewriter"></p>
-    </section>
+<!--========================================================== -->
+<!-- PRESENTATION -->
+<!--========================================================== -->
+<section class="presentation d-flex justify-content-center align-items-center m-auto">
+    <p class="welcome text-center mb-4" id="typewriter"></p>
+</section>
 
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+<main>
+    <section class="row">
+        <article>          
+
+            <div class="row justify-content-md-center">
+
+                <div class="col-md-4">
+                    <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                        <img src="~/Recursos/renta.jpg" class="card-img-top imagen-card" alt="Direcciones">
+                        <div class="card-body">
+                            <h5 class="card-title">Rentas</h5>
+                            <p class="card-text">Crear, ver, editar o eliminar una renta con base a un vehículo, cliente y empleado.</p>
+                        </div>
+                        <div class="card-body">
+                            @Html.ActionLink("Rentas", "Index", "Rentas", new { area = "" }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Reglas Negocio y Usuario", "About", "Home", new { area = "" }, new { @class = "btn btn-warning" })
+                        </div>
+                    </div>
+
+                    <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                        <img src="~/Recursos/empleados.jpg" class="card-img-top imagen-card" alt="Direcciones">
+                        <div class="card-body">
+                            <h5 class="card-title">Empleados</h5>
+                            <p class="card-text">Crear, ver, editar o eliminar un empleado para poder ser asignado a una renta (se necesita crear su dirección primero).</p>
+                        </div>
+                        <div class="card-body">
+                            @Html.ActionLink("Empleados", "Index", "Empleados", new { area = "" }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Reglas Negocio y Usuario", "About", "Home", new { area = "" }, new { @class = "btn btn-warning" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                        <img src="~/Recursos/clientes.jpg" class="card-img-top imagen-card" alt="Direcciones">
+                        <div class="card-body">
+                            <h5 class="card-title">Clientes</h5>
+                            <p class="card-text">Crear, ver, editar o eliminar un cliente para poder ser asignado a una renta (se necesita crear su dirección primero).</p>
+                        </div>
+                        <div class="card-body">
+                            @Html.ActionLink("Clientes", "Index", "Clientes", new { area = "" }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Reglas Negocio y Usuario", "About", "Home", new { area = "" }, new { @class = "btn btn-warning" })
+                        </div>
+                    </div>
+
+                    <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                        <img src="~/Recursos/direcciones.jpg" class="card-img-top imagen-card" alt="Direcciones">
+                        <div class="card-body">
+                            <h5 class="card-title">Direcciones</h5>
+                            <p class="card-text">Crear, ver, editar o eliminar una dirección que se le asignará a un cliente y/o empleado.</p>
+                        </div>
+                        <div class="card-body">
+                            @Html.ActionLink("Direcciones", "Index", "Direcciones", new { area = "" }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Reglas Negocio y Usuario", "About", "Home", new { area = "" }, new { @class = "btn btn-warning" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                        <img src="~/Recursos/vehiculo.jpg" class="card-img-top imagen-card" alt="Direcciones">
+                        <div class="card-body">
+                            <h5 class="card-title">Vehículos</h5>
+                            <p class="card-text">Crear, ver, editar o eliminar un vehículo para poder ser asignado a una renta.</p>
+                        </div>
+                        <div class="card-body">
+                            @Html.ActionLink("Vehículos", "Index", "Vehiculos", new { area = "" }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Reglas Negocio y Usuario", "About", "Home", new { area = "" }, new { @class = "btn btn-warning" })
+                        </div>
+                    </div>
+
+                    <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                        <img src="~/Recursos/mantenimiento.jpg" class="card-img-top imagen-card" alt="Direcciones">
+                        <div class="card-body">
+                            <h5 class="card-title">Mantenimientos</h5>
+                            <p class="card-text">Crear, ver, editar o eliminar un mantenimiento que le pertenece a los vehículos (se requiere de un vehículo o si ya existe solo se le asigna).</p>
+                        </div>
+                        <div class="card-body">
+                            @Html.ActionLink("Mantenimientos", "Index", "Mantenimientos", new { area = "" }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Reglas Negocio y Usuario", "About", "Home", new { area = "" }, new { @class = "btn btn-warning" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>            
+
+        </article>
     </section>
 </main>

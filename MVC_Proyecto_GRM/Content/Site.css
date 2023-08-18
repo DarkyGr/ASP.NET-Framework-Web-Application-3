@@ -19,6 +19,7 @@ textarea {
     max-width: 280px;
 }
 
+/* FORMS ERRORES*/
 .red{
     color: red;
     width: 150px;
@@ -30,4 +31,14 @@ textarea {
 
 .lblTitulo{
     font-weight: bold;
+}
+
+/* INDEX HOME */
+.imagen-card{
+    height: 375px;
+    width: 375px;
+}
+
+.texto-hov:hover{
+    color: orange;
 }
