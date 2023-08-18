@@ -1,11 +1,19 @@
 ﻿@model MVC_Proyecto_GRM.Models.Empleados
 
-<h2 class="text-center">Editando empleado con ID: @Html.ValueFor(d => d.EmpleadoId)</h2>
+<div class="row p-md-2">
+    <div class="card text-bg-dark">
+        <img src="/Recursos/wp-1.jpg" class="card-img" alt="...">
+        <div class="card-img-overlay text-center">
+            <h2 class="card-title">Editando Empleado</h2>
+            <h4 class="card-body">>>> ID: @Html.ValueFor(d => d.EmpleadoId) <<<</h4>
+        </div>
+    </div>
+</div>
 
 @using (Html.BeginForm("EmpleadoEditar", "Empleados", FormMethod.Post))    // Metodo, Controller, Post Method
 {
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             @Html.HiddenFor(d => d.EmpleadoId)
             <div>
                 @Html.LabelFor(d => d.Nombre, null, new { @class = "lblTitulo" })
@@ -21,7 +29,9 @@
                 @Html.LabelFor(d => d.ApellidoM, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.ApellidoM, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.ApellidoM, "", new { @class = "red" })
-            </div>
+            </div>            
+        </div>
+        <div class="col-md-6">
             <div>
                 @Html.LabelFor(d => d.Salario, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Salario, "", new { @class = "form-control" })

@@ -3,12 +3,19 @@
     ViewBag.Title = "Agregar una nueva renta";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<div class="row p-md-2">
+    <div class="card text-bg-dark">
+        <img src="/Recursos/wp-1.jpg" class="card-img" alt="...">
+        <div class="card-img-overlay text-center">
+            <h1 class="card-title">@ViewBag.Title</h1>
+        </div>
+    </div>
+</div>
 
 @using (Html.BeginForm("RentaAgregar", "Rentas", FormMethod.Post))    // Metodo, Controller, Post Method
 {
     <div class="row">
-        <div class="col-md-12">            
+        <div class="col-md-6">            
             <div>
                 @Html.Label("Vehículo", null, new { @class = "lblTitulo" })
                 @Html.DropDownListFor(d => d.VehiculoId, new SelectList(ViewBag.ListaVehiculos, "VehiculoId", "Info"), new { @class = "form-control" })
@@ -20,7 +27,10 @@
             <div>
                 @Html.Label("Empleado", null, new { @class = "lblTitulo" })
                 @Html.DropDownListFor(d => d.EmpleadoId, new SelectList(ViewBag.ListaEmpleados, "EmpleadoId", "Nombre"), new { @class = "form-control" })
-            </div>
+            </div>            
+        </div>
+
+        <div class="col-md-6">
             <div>
                 @Html.LabelFor(d => d.Costo, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Costo, "", new { @class = "form-control" })

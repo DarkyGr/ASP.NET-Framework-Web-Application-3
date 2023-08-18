@@ -3,12 +3,19 @@
     ViewBag.Title = "Agregar un nuevo cliente";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<div class="row p-md-2">
+    <div class="card text-bg-dark">
+        <img src="/Recursos/wp-1.jpg" class="card-img" alt="...">
+        <div class="card-img-overlay text-center">
+            <h1 class="card-title">@ViewBag.Title</h1>
+        </div>
+    </div>
+</div>
 
 @using (Html.BeginForm("ClienteAgregar", "Clientes", FormMethod.Post))    // Metodo, Controller, Post Method
 {
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div>
                 @Html.LabelFor(d => d.Nombre, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Nombre, "", new { @class = "form-control" })
@@ -31,8 +38,9 @@
                 @Html.LabelFor(d => d.Telefono, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Telefono, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Telefono, "", new { @class = "red" })
-            </div>
-            <br />
+            </div>            
+        </div>
+        <div class="col-md-6">
             <div>
                 @Html.LabelFor(d => d.NumLicencia, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.NumLicencia, "", new { @class = "form-control" })

@@ -1,11 +1,19 @@
 ﻿@model MVC_Proyecto_GRM.Models.Rentas
 
-<h2 class="text-center">Editando renta con ID: @Html.ValueFor(d => d.RentaId)</h2>
+<div class="row p-md-2">
+    <div class="card text-bg-dark">
+        <img src="/Recursos/wp-1.jpg" class="card-img" alt="...">
+        <div class="card-img-overlay text-center">
+            <h2 class="card-title">Editando Renta</h2>
+            <h4 class="card-body">>>> ID: @Html.ValueFor(d => d.RentaId) <<<</h4>
+        </div>
+    </div>
+</div>
 
 @using (Html.BeginForm("RentaEditar", "Rentas", FormMethod.Post))    // Metodo, Controller, Post Method
 {
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             @Html.HiddenFor(d => d.RentaId)
             <div>
                 @Html.Label("Vehículo", null, new { @class = "lblTitulo" })
@@ -18,7 +26,9 @@
             <div>
                 @Html.Label("Empleado", null, new { @class = "lblTitulo" })
                 @Html.DropDownListFor(d => d.EmpleadoId, new SelectList(ViewBag.ListaEmpleados, "EmpleadoId", "Nombre"), new { @class = "form-control" })
-            </div>
+            </div>            
+        </div>
+        <div class="col-md-6">
             <div>
                 @Html.LabelFor(d => d.Costo, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Costo, "", new { @class = "form-control" })

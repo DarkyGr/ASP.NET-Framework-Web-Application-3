@@ -3,12 +3,19 @@
     ViewBag.Title = "Agregar un nuevo vehículo";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<div class="row p-md-2">
+    <div class="card text-bg-dark">
+        <img src="/Recursos/wp-1.jpg" class="card-img" alt="...">
+        <div class="card-img-overlay text-center">
+            <h1 class="card-title">@ViewBag.Title</h1>            
+        </div>
+    </div>
+</div>
 
 @using (Html.BeginForm("VehiculoAgregar", "Vehiculos", FormMethod.Post))    // Metodo, Controller, Post Method
 {
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div>
                 @Html.LabelFor(d => d.Matricula, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Matricula, "", new { @class = "form-control" })
@@ -24,6 +31,9 @@
                 @Html.TextBoxFor(d => d.Modelo, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Modelo, "", new { @class = "red" })
             </div>
+        </div>
+
+        <div class="col-md-6">            
             <div>
                 @Html.LabelFor(d => d.Capacidad, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Capacidad, "", new { @class = "form-control" })
@@ -33,7 +43,7 @@
                 @Html.LabelFor(d => d.Kilometraje, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Kilometraje, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Kilometraje, "", new { @class = "red" })
-            </div>            
+            </div>
             <div style="text-align: right;">
                 <input value="Guardar" class="btn btn-success" type="submit" />
             </div>

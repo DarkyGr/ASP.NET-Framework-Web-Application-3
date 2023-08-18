@@ -3,12 +3,19 @@
     ViewBag.Title = "Agregar un nuevo mantenimiento";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<div class="row p-md-2">
+    <div class="card text-bg-dark">
+        <img src="/Recursos/wp-1.jpg" class="card-img" alt="...">
+        <div class="card-img-overlay text-center">
+            <h1 class="card-title">@ViewBag.Title</h1>
+        </div>
+    </div>
+</div>
 
 @using (Html.BeginForm("MantenimientoAgregar", "Mantenimientos", FormMethod.Post))    // Metodo, Controller, Post Method
 {
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div>
                 @Html.Label("Vehículo", null, new { @class = "lblTitulo" })
                 @Html.DropDownListFor(d => d.VehiculoId, new SelectList(ViewBag.ListaVehiculos, "VehiculoId", "Info"), new { @class = "form-control" })
@@ -17,7 +24,9 @@
                 @Html.LabelFor(d => d.Nota, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Nota, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Nota, "", new { @class = "red" })
-            </div>
+            </div>            
+        </div>
+        <div class="col-md-6">
             <div>
                 @Html.LabelFor(d => d.Fecha, null, new { @class = "lblTitulo" })<br />
                 @Html.EditorFor(d => d.Fecha, "", new { @class = "date" })
