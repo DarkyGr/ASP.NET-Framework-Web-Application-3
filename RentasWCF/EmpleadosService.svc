@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="RentasWCF.EmpleadosService" CodeBehind="EmpleadosService.svc.cs" %>

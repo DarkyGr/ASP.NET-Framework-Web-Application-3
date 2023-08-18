@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RentaCarrosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DireccionId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoM" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="10" />
+          <Property Name="NumLicencia" Type="int" Nullable="false" />
+          <Property Name="FechaVencimientoLicencia" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Direcciones">
+          <Key>
+            <PropertyRef Name="DireccionId" />
+          </Key>
+          <Property Name="DireccionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Calle" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Numero" Type="int" />
+          <Property Name="Colonia" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CP" Type="int" Nullable="false" />
+          <Property Name="Municipio" Type="varchar" MaxLength="100" />
+          <Property Name="Ciudad" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="EmpleadoId" />
+          </Key>
+          <Property Name="EmpleadoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DireccionId" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoM" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salario" Type="float" Nullable="false" />
+          <Property Name="Puesto" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mantenimientos">
+          <Key>
+            <PropertyRef Name="MantenimientoId" />
+          </Key>
+          <Property Name="MantenimientoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehiculoId" Type="int" Nullable="false" />
+          <Property Name="Nota" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rentas">
+          <Key>
+            <PropertyRef Name="RentaId" />
+          </Key>
+          <Property Name="RentaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehiculoId" Type="int" Nullable="false" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="EmpleadoId" Type="int" Nullable="false" />
+          <Property Name="Costo" Type="float" Nullable="false" />
+          <Property Name="FechaRenta" Type="datetime" Nullable="false" />
+          <Property Name="FechaRentaFin" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Vehiculos">
+          <Key>
+            <PropertyRef Name="VehiculoId" />
+          </Key>
+          <Property Name="VehiculoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Matricula" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Marca" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Modelo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Capacidad" Type="int" Nullable="false" />
+          <Property Name="Kilometraje" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Clientes__Direcc__3C69FB99">
+          <End Role="Direcciones" Type="Self.Direcciones" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direcciones">
+              <PropertyRef Name="DireccionId" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="DireccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__Puest__398D8EEE">
+          <End Role="Direcciones" Type="Self.Direcciones" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direcciones">
+              <PropertyRef Name="DireccionId" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="DireccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mantenimi__Vehic__412EB0B6">
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
+          <End Role="Mantenimientos" Type="Self.Mantenimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="VehiculoId" />
+            </Principal>
+            <Dependent Role="Mantenimientos">
+              <PropertyRef Name="VehiculoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rentas__ClienteI__44FF419A">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Rentas">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rentas__Empleado__45F365D3">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="EmpleadoId" />
+            </Principal>
+            <Dependent Role="Rentas">
+              <PropertyRef Name="EmpleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rentas__Vehiculo__440B1D61">
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="VehiculoId" />
+            </Principal>
+            <Dependent Role="Rentas">
+              <PropertyRef Name="VehiculoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RentaCarrosModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direcciones" EntityType="Self.Direcciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mantenimientos" EntityType="Self.Mantenimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rentas" EntityType="Self.Rentas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Clientes__Direcc__3C69FB99" Association="Self.FK__Clientes__Direcc__3C69FB99">
+            <End Role="Direcciones" EntitySet="Direcciones" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__Puest__398D8EEE" Association="Self.FK__Empleados__Puest__398D8EEE">
+            <End Role="Direcciones" EntitySet="Direcciones" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mantenimi__Vehic__412EB0B6" Association="Self.FK__Mantenimi__Vehic__412EB0B6">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="Mantenimientos" EntitySet="Mantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rentas__ClienteI__44FF419A" Association="Self.FK__Rentas__ClienteI__44FF419A">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Rentas" EntitySet="Rentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rentas__Empleado__45F365D3" Association="Self.FK__Rentas__Empleado__45F365D3">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Rentas" EntitySet="Rentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rentas__Vehiculo__440B1D61" Association="Self.FK__Rentas__Vehiculo__440B1D61">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="Rentas" EntitySet="Rentas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RentaCarrosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DireccionId" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumLicencia" Type="Int32" Nullable="false" />
+          <Property Name="FechaVencimientoLicencia" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Direcciones" Relationship="Self.FK__Clientes__Direcc__3C69FB99" FromRole="Clientes" ToRole="Direcciones" />
+          <NavigationProperty Name="Rentas" Relationship="Self.FK__Rentas__ClienteI__44FF419A" FromRole="Clientes" ToRole="Rentas" />
+        </EntityType>
+        <EntityType Name="Direcciones">
+          <Key>
+            <PropertyRef Name="DireccionId" />
+          </Key>
+          <Property Name="DireccionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Numero" Type="Int32" />
+          <Property Name="Colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CP" Type="Int32" Nullable="false" />
+          <Property Name="Municipio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Clientes__Direcc__3C69FB99" FromRole="Direcciones" ToRole="Clientes" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Empleados__Puest__398D8EEE" FromRole="Direcciones" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="EmpleadoId" />
+          </Key>
+          <Property Name="EmpleadoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DireccionId" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Salario" Type="Double" Nullable="false" />
+          <Property Name="Puesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Direcciones" Relationship="Self.FK__Empleados__Puest__398D8EEE" FromRole="Empleados" ToRole="Direcciones" />
+          <NavigationProperty Name="Rentas" Relationship="Self.FK__Rentas__Empleado__45F365D3" FromRole="Empleados" ToRole="Rentas" />
+        </EntityType>
+        <EntityType Name="Mantenimientos">
+          <Key>
+            <PropertyRef Name="MantenimientoId" />
+          </Key>
+          <Property Name="MantenimientoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehiculoId" Type="Int32" Nullable="false" />
+          <Property Name="Nota" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Vehiculos" Relationship="Self.FK__Mantenimi__Vehic__412EB0B6" FromRole="Mantenimientos" ToRole="Vehiculos" />
+        </EntityType>
+        <EntityType Name="Rentas">
+          <Key>
+            <PropertyRef Name="RentaId" />
+          </Key>
+          <Property Name="RentaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehiculoId" Type="Int32" Nullable="false" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="EmpleadoId" Type="Int32" Nullable="false" />
+          <Property Name="Costo" Type="Double" Nullable="false" />
+          <Property Name="FechaRenta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaRentaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Rentas__ClienteI__44FF419A" FromRole="Rentas" ToRole="Clientes" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Rentas__Empleado__45F365D3" FromRole="Rentas" ToRole="Empleados" />
+          <NavigationProperty Name="Vehiculos" Relationship="Self.FK__Rentas__Vehiculo__440B1D61" FromRole="Rentas" ToRole="Vehiculos" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Vehiculos">
+          <Key>
+            <PropertyRef Name="VehiculoId" />
+          </Key>
+          <Property Name="VehiculoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Matricula" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Marca" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Modelo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Capacidad" Type="Int32" Nullable="false" />
+          <Property Name="Kilometraje" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Mantenimientos" Relationship="Self.FK__Mantenimi__Vehic__412EB0B6" FromRole="Vehiculos" ToRole="Mantenimientos" />
+          <NavigationProperty Name="Rentas" Relationship="Self.FK__Rentas__Vehiculo__440B1D61" FromRole="Vehiculos" ToRole="Rentas" />
+        </EntityType>
+        <Association Name="FK__Clientes__Direcc__3C69FB99">
+          <End Role="Direcciones" Type="Self.Direcciones" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direcciones">
+              <PropertyRef Name="DireccionId" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="DireccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rentas__ClienteI__44FF419A">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Rentas">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Empleados__Puest__398D8EEE">
+          <End Role="Direcciones" Type="Self.Direcciones" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direcciones">
+              <PropertyRef Name="DireccionId" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="DireccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rentas__Empleado__45F365D3">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="EmpleadoId" />
+            </Principal>
+            <Dependent Role="Rentas">
+              <PropertyRef Name="EmpleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mantenimi__Vehic__412EB0B6">
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
+          <End Role="Mantenimientos" Type="Self.Mantenimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="VehiculoId" />
+            </Principal>
+            <Dependent Role="Mantenimientos">
+              <PropertyRef Name="VehiculoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rentas__Vehiculo__440B1D61">
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
+          <End Role="Rentas" Type="Self.Rentas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="VehiculoId" />
+            </Principal>
+            <Dependent Role="Rentas">
+              <PropertyRef Name="VehiculoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RentaCarrosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Direcciones" EntityType="Self.Direcciones" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Mantenimientos" EntityType="Self.Mantenimientos" />
+          <EntitySet Name="Rentas" EntityType="Self.Rentas" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" />
+          <AssociationSet Name="FK__Clientes__Direcc__3C69FB99" Association="Self.FK__Clientes__Direcc__3C69FB99">
+            <End Role="Direcciones" EntitySet="Direcciones" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rentas__ClienteI__44FF419A" Association="Self.FK__Rentas__ClienteI__44FF419A">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Rentas" EntitySet="Rentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Empleados__Puest__398D8EEE" Association="Self.FK__Empleados__Puest__398D8EEE">
+            <End Role="Direcciones" EntitySet="Direcciones" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rentas__Empleado__45F365D3" Association="Self.FK__Rentas__Empleado__45F365D3">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Rentas" EntitySet="Rentas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mantenimi__Vehic__412EB0B6" Association="Self.FK__Mantenimi__Vehic__412EB0B6">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="Mantenimientos" EntitySet="Mantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rentas__Vehiculo__440B1D61" Association="Self.FK__Rentas__Vehiculo__440B1D61">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="Rentas" EntitySet="Rentas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RentaCarrosModelStoreContainer" CdmEntityContainer="RentaCarrosEntities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="RentaCarrosModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="DireccionId" ColumnName="DireccionId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+                <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="NumLicencia" ColumnName="NumLicencia" />
+                <ScalarProperty Name="FechaVencimientoLicencia" ColumnName="FechaVencimientoLicencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Direcciones">
+            <EntityTypeMapping TypeName="RentaCarrosModel.Direcciones">
+              <MappingFragment StoreEntitySet="Direcciones">
+                <ScalarProperty Name="DireccionId" ColumnName="DireccionId" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="RentaCarrosModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+                <ScalarProperty Name="DireccionId" ColumnName="DireccionId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoP" ColumnName="ApellidoP" />
+                <ScalarProperty Name="ApellidoM" ColumnName="ApellidoM" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mantenimientos">
+            <EntityTypeMapping TypeName="RentaCarrosModel.Mantenimientos">
+              <MappingFragment StoreEntitySet="Mantenimientos">
+                <ScalarProperty Name="MantenimientoId" ColumnName="MantenimientoId" />
+                <ScalarProperty Name="VehiculoId" ColumnName="VehiculoId" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rentas">
+            <EntityTypeMapping TypeName="RentaCarrosModel.Rentas">
+              <MappingFragment StoreEntitySet="Rentas">
+                <ScalarProperty Name="RentaId" ColumnName="RentaId" />
+                <ScalarProperty Name="VehiculoId" ColumnName="VehiculoId" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="EmpleadoId" ColumnName="EmpleadoId" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="FechaRenta" ColumnName="FechaRenta" />
+                <ScalarProperty Name="FechaRentaFin" ColumnName="FechaRentaFin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RentaCarrosModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehiculos">
+            <EntityTypeMapping TypeName="RentaCarrosModel.Vehiculos">
+              <MappingFragment StoreEntitySet="Vehiculos">
+                <ScalarProperty Name="VehiculoId" ColumnName="VehiculoId" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+                <ScalarProperty Name="Kilometraje" ColumnName="Kilometraje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
