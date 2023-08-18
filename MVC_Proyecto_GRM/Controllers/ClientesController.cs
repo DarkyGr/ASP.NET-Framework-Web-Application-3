@@ -93,8 +93,8 @@ namespace MVC_Proyecto_GRM.Controllers
 
         public ActionResult ClienteEditar(int id)
         {            
-            Clientes cliente = new Clientes();
             CargarDDL();
+            Clientes cliente = new Clientes();
 
             using (RentaCarrosEntities db = new RentaCarrosEntities())
             {
@@ -102,7 +102,6 @@ namespace MVC_Proyecto_GRM.Controllers
                 cliente = db.Clientes.Where(x => x.ClienteId == id).FirstOrDefault();
             }
 
-            ViewBag.Title = "Editando cliente con ID: " + cliente.ClienteId;
             return View(cliente);
         }
 

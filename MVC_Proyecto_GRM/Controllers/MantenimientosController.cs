@@ -92,8 +92,6 @@ namespace MVC_Proyecto_GRM.Controllers
                 mantenimiento = db.Mantenimientos.Where(x => x.MantenimientoId == id).FirstOrDefault();
             }
 
-            ViewBag.Title = "Editando mantenimiento con ID: " + mantenimiento.MantenimientoId;
-
             return View(mantenimiento);
         }
 

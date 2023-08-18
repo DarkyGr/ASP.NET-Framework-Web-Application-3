@@ -3,7 +3,20 @@
     ViewBag.Title = "Listar Empleados";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<div class="row p-md-2">
+    <div class="card text-bg-dark">
+        <img src="/Recursos/wp-1.jpg" class="card-img" alt="...">
+        <div class="card-img-overlay text-center">
+            <h1 class="card-title">@ViewBag.Title</h1>
+            <p class="card-text">
+                <small>
+                    Para recordar como se manejan las acciones clic
+                    @Html.ActionLink("aquí", "About", "Home", new { area = "" }, new { @class = "text-primary" }).
+                </small>
+            </p>
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-xs-2 m-md-2" style="text-align: right;">

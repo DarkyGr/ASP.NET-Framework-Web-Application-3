@@ -1,6 +1,6 @@
 ﻿@model MVC_Proyecto_GRM.Models.Rentas
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">Editando renta con ID: @Html.ValueFor(d => d.RentaId)</h2>
 
 @using (Html.BeginForm("RentaEditar", "Rentas", FormMethod.Post))    // Metodo, Controller, Post Method
 {

@@ -1,6 +1,6 @@
 ﻿@model MVC_Proyecto_GRM.Models.Clientes
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">Editando cliente con ID: @Html.ValueFor(d => d.ClienteId)</h2>
 
 @using (Html.BeginForm("ClienteEditar", "Clientes", FormMethod.Post))    // Metodo, Controller, Post Method
 {

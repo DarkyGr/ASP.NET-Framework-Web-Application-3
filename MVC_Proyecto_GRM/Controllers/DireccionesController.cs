@@ -91,8 +91,6 @@ namespace MVC_Proyecto_GRM.Controllers
                 direccion = db.Direcciones.Where(x => x.DireccionId == id).FirstOrDefault();
             }
 
-            ViewBag.Title = "Editando dirección con ID: " + direccion.DireccionId;
-
             return View(direccion);
         }
 

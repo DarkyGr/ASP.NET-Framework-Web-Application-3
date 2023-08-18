@@ -101,8 +101,6 @@ namespace MVC_Proyecto_GRM.Controllers
                 renta = db.Rentas.Where(x => x.RentaId == id).FirstOrDefault();
             }
 
-            ViewBag.Title = "Editando renta con ID: " + renta.RentaId;
-
             return View(renta);
         }
 

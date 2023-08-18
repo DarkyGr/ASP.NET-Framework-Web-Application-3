@@ -88,8 +88,6 @@ namespace MVC_Proyecto_GRM.Controllers
                 vehiculo = db.Vehiculos.Where(x => x.VehiculoId == id).FirstOrDefault();
             }
 
-            ViewBag.Title = "Editando cliente con ID: " + vehiculo.VehiculoId;
-
             return View(vehiculo);
         }
 

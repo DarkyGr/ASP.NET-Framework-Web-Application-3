@@ -1,6 +1,6 @@
 ﻿@model MVC_Proyecto_GRM.Models.Mantenimientos
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center">Editando mantenimiento con ID: @Html.ValueFor(d => d.MantenimientoId)</h2>
 
 @using (Html.BeginForm("MantenimientoEditar", "Mantenimientos", FormMethod.Post))    // Metodo, Controller, Post Method
 {

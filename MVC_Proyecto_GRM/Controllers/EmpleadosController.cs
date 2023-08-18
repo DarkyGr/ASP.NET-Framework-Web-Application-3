@@ -99,8 +99,6 @@ namespace MVC_Proyecto_GRM.Controllers
                 empleado = db.Empleados.Where(x => x.EmpleadoId == id).FirstOrDefault();
             }
 
-            ViewBag.Title = "Editando empleado con ID: " + empleado.EmpleadoId;
-
             return View(empleado);
         }
 
