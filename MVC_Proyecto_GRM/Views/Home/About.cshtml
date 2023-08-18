@@ -5,64 +5,107 @@
         <div class="presentation-1">            
             <h2 class="text-center text-white p-md-4">Reglas de negocio y usuario</h2>
         </div> <br /><br />
+    </div>
 
-        <div class="col-md-4 m-md-2">
-            @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+    <div class="row">
+        <div class="row justify-content-md-center">
+
+            <div class="col-md-4">
+                <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Rentas</h5>                        
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Agregar --> No vacíos y la fecha renta fin debe ser mayor a la fecha renta.</li>
+                        <li class="list-group-item">Editar ---> No vacíos y se puede editar todo mientras la fecha de renta no sea mayor a la actual, en caso contrario solo se puede editar el costo y la fecha renta fin. Tambien si la fehca renta fin es mayor a hoy no se puede editar.</li>
+                        <li class="list-group-item">Eliminar -> Solo se puede eliminar una renta si la fecha renta no es mayor a la actual.</li>
+                    </ul>
+                    <div class="card-body">
+                        @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Rentas", "Index", "Rentas", new { area = "" }, new { @class = "btn btn-warning" })
+                    </div>
+                </div>
+
+                <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Empleados</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Agregar --> No vacíos.</li>
+                        <li class="list-group-item">Editar ---> No vacíos y solo se puede editar el salario y el puesto.</li>
+                        <li class="list-group-item">Eliminar -> No se puede eliminar un empleado si posee una o varias rentas.</li>
+                    </ul>
+                    <div class="card-body">
+                        @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Empleados", "Index", "Empleados", new { area = "" }, new { @class = "btn btn-warning" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Clientes</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Agregar --> No vacíos y solo se agregará si no se repite el teléfono y número de licencia.</li>
+                        <li class="list-group-item">Editar ---> No vacíos y solo se puede editar el teléfono y dirección.</li>
+                        <li class="list-group-item">Eliminar -> No se puede eliminar un cliente si posee una o varias rentas.</li>
+                    </ul>
+                    <div class="card-body">
+                        @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Clientes", "Index", "Clientes", new { area = "" }, new { @class = "btn btn-warning" })
+                    </div>
+                </div>
+
+                <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Direcciones</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Agregar --> No vacíos.</li>
+                        <li class="list-group-item">Editar ---> No vacíos.</li>
+                        <li class="list-group-item">Eliminar -> No se puede eliminar una dirección si un cliente o empleado la posee.</li>
+                    </ul>
+                    <div class="card-body">
+                        @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Direcciones", "Index", "Direcciones", new { area = "" }, new { @class = "btn btn-warning" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Vehículos</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Agregar --> No vacíos.</li>
+                        <li class="list-group-item">Editar ---> No vacíos y no se puede editar la marca, modelo y capacidad.</li>
+                        <li class="list-group-item">Eliminar -> No se puede eliminar un vehículo si cuenta con uno o varios mantenimientos.</li>
+                    </ul>
+                    <div class="card-body">
+                        @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Vehículos", "Index", "Vehiculos", new { area = "" }, new { @class = "btn btn-warning" })
+                    </div>
+                </div>
+
+                <div class="card m-md-4 border border-primary" style="width: 22rem;">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Mantenimientos</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Agregar --> No vacíos.</li>
+                        <li class="list-group-item">Editar ---> No se puede editar el vehículo y la fecha.</li>
+                        <li class="list-group-item">Eliminar -> Se puede eliminar cualquier mantenimiento.</li>
+                    </ul>
+                    <div class="card-body">
+                        @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Mantenimientos", "Index", "Mantenimientos", new { area = "" }, new { @class = "btn btn-warning" })
+                    </div>
+                </div>
+
+            </div>
         </div>
-
-        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
-            <h5>Rentas</h5>
-            <ul>
-                <li>Agregar --> </li>
-                <li>Editar ----> </li>
-                <li>Eliminar -> </li>
-            </ul>
-        </div>
-
-        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
-            <h5>Clientes</h5>
-            <ul>
-                <li>Agregar --> </li>
-                <li>Editar ----> </li>
-                <li>Eliminar -> </li>
-            </ul>
-        </div>
-
-        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
-            <h5>Vehículos</h5>
-            <ul>
-                <li>Agregar --> </li>
-                <li>Editar ----> </li>
-                <li>Eliminar -> </li>
-            </ul>
-        </div>
-
-        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
-            <h5>Empleados</h5>
-            <ul>
-                <li>Agregar --> </li>
-                <li>Editar ----> </li>
-                <li>Eliminar -> </li>
-            </ul>
-        </div>
-
-        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
-            <h5>Direcciones</h5>
-            <ul>
-                <li>Agregar --> </li>
-                <li>Editar ----> </li>
-                <li>Eliminar -> </li>
-            </ul>
-        </div>
-
-        <div class="col-md-12 m-md-3 p-md-3 bg-success bg-gradient text-white">
-            <h5>Mantenimientos</h5>
-            <ul>
-                <li>Agregar --> </li>
-                <li>Editar ----> </li>
-                <li>Eliminar -> </li>
-            </ul>
-        </div>
-
     </div>
 </main>
