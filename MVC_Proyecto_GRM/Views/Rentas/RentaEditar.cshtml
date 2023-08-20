@@ -13,40 +13,122 @@
 @using (Html.BeginForm("RentaEditar", "Rentas", FormMethod.Post))    // Metodo, Controller, Post Method
 {
     <div class="row">
-        <div class="col-md-6">
-            @Html.HiddenFor(d => d.RentaId)
-            <div>
-                @Html.Label("Vehículo", null, new { @class = "lblTitulo" })
-                @Html.DropDownListFor(d => d.VehiculoId, new SelectList(ViewBag.ListaVehiculos, "VehiculoId", "Info"), new { @class = "form-control" })
+        @if (ViewBag.CambiarTodo == 1)
+        {
+            <div class="col-md-6">
+                @Html.HiddenFor(d => d.RentaId)
+                <div>
+                    @Html.Label("Vehículo", null, new { @class = "lblTitulo" })
+                    @Html.DropDownListFor(d => d.VehiculoId, new SelectList(ViewBag.ListaVehiculos, "VehiculoId", "Info"), new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.Label("Cliente", null, new { @class = "lblTitulo" })
+                    @Html.DropDownListFor(d => d.ClienteId, new SelectList(ViewBag.ListaClientes, "ClienteId", "Nombre"), new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.Label("Empleado", null, new { @class = "lblTitulo" })
+                    @Html.DropDownListFor(d => d.EmpleadoId, new SelectList(ViewBag.ListaEmpleados, "EmpleadoId", "Nombre"), new { @class = "form-control" })
+                </div>
             </div>
-            <div>
-                @Html.Label("Cliente", null, new { @class = "lblTitulo" })
-                @Html.DropDownListFor(d => d.ClienteId, new SelectList(ViewBag.ListaClientes, "ClienteId", "Nombre"), new { @class = "form-control" })
+            <div class="col-md-6">
+                <div>
+                    @Html.LabelFor(d => d.Costo, null, new { @class = "lblTitulo" })
+                    @Html.TextBoxFor(d => d.Costo, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.Costo, "", new { @class = "red" })
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.FechaRenta, null, new { @class = "lblTitulo" })<br />
+                    @Html.EditorFor(d => d.FechaRenta, "", new { @class = "date" })
+                    @Html.ValidationMessageFor(d => d.FechaRenta, "", new { @class = "red" })
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.FechaRentaFin, null, new { @class = "lblTitulo" })<br />
+                    @Html.EditorFor(d => d.FechaRentaFin, "", new { @class = "date" })
+                    @Html.ValidationMessageFor(d => d.FechaRentaFin, "", new { @class = "red" })
+                </div>
+                <div style="text-align: right;">
+                    <input value="Guardar" class="btn btn-success" type="submit" />
+                </div>
             </div>
-            <div>
-                @Html.Label("Empleado", null, new { @class = "lblTitulo" })
-                @Html.DropDownListFor(d => d.EmpleadoId, new SelectList(ViewBag.ListaEmpleados, "EmpleadoId", "Nombre"), new { @class = "form-control" })
-            </div>            
-        </div>
-        <div class="col-md-6">
-            <div>
-                @Html.LabelFor(d => d.Costo, null, new { @class = "lblTitulo" })
-                @Html.TextBoxFor(d => d.Costo, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.Costo, "", new { @class = "red" })
+        }
+        else if (ViewBag.CambiarTodo == 2)
+        {
+            <div class="col-md-6">
+                @Html.HiddenFor(d => d.RentaId)
+                @Html.HiddenFor(d => d.VehiculoId)
+                @Html.HiddenFor(d => d.ClienteId)
+                @Html.HiddenFor(d => d.EmpleadoId)
+                <div>
+                    @Html.Label("Vehículo", null, new { @class = "lblTitulo" })
+                    @Html.DropDownListFor(d => d.VehiculoId, new SelectList(ViewBag.ListaVehiculos, "VehiculoId", "Info"), new { @class = "form-control", @disabled = "disabled" })
+                </div>
+                <div>
+                    @Html.Label("Cliente", null, new { @class = "lblTitulo" })
+                    @Html.DropDownListFor(d => d.ClienteId, new SelectList(ViewBag.ListaClientes, "ClienteId", "Nombre"), new { @class = "form-control", @disabled = "disabled" })
+                </div>
+                <div>
+                    @Html.Label("Empleado", null, new { @class = "lblTitulo" })
+                    @Html.DropDownListFor(d => d.EmpleadoId, new SelectList(ViewBag.ListaEmpleados, "EmpleadoId", "Nombre"), new { @class = "form-control", @disabled = "disabled" })
+                </div>
             </div>
-            <div>
-                @Html.LabelFor(d => d.FechaRenta, null, new { @class = "lblTitulo" })<br />
-                @Html.EditorFor(d => d.FechaRenta, "", new { @class = "date" })
-                @Html.ValidationMessageFor(d => d.FechaRenta, "", new { @class = "red" })
+            <div class="col-md-6">
+                <div>
+                    @Html.LabelFor(d => d.Costo, null, new { @class = "lblTitulo" })
+                    @Html.TextBoxFor(d => d.Costo, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.Costo, "", new { @class = "red" })
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.FechaRenta, null, new { @class = "lblTitulo" })<br />
+                    @Html.EditorFor(d => d.FechaRenta, "", new { @class = "date", htmlAttributes = new { ReadOnly = true, style = "background-color: #EEEEEE" } })
+                    @Html.ValidationMessageFor(d => d.FechaRenta, "", new { @class = "red" })
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.FechaRentaFin, null, new { @class = "lblTitulo" })<br />
+                    @Html.EditorFor(d => d.FechaRentaFin, "", new { @class = "date" })
+                    @Html.ValidationMessageFor(d => d.FechaRentaFin, "", new { @class = "red" })
+                </div>
+                <div style="text-align: right;">
+                    <input value="Guardar" class="btn btn-success" type="submit" />
+                </div>
             </div>
-            <div>
-                @Html.LabelFor(d => d.FechaRentaFin, null, new { @class = "lblTitulo" })<br />
-                @Html.EditorFor(d => d.FechaRentaFin, "", new { @class = "date" })
-                @Html.ValidationMessageFor(d => d.FechaRentaFin, "", new { @class = "red" })
+        }
+        else if (ViewBag.CambiarTodo == 3)
+        {
+            <div class="col-md-6">
+                @Html.HiddenFor(d => d.RentaId)
+                <div>
+                    @Html.Label("Vehículo", null, new { @class = "lblTitulo" })
+                    @Html.DropDownListFor(d => d.VehiculoId, new SelectList(ViewBag.ListaVehiculos, "VehiculoId", "Info"), new { @class = "form-control", @disabled = "disabled" })
+                </div>
+                <div>
+                    @Html.Label("Cliente", null, new { @class = "lblTitulo" })
+                    @Html.DropDownListFor(d => d.ClienteId, new SelectList(ViewBag.ListaClientes, "ClienteId", "Nombre"), new { @class = "form-control", @disabled = "disabled" })
+                </div>
+                <div>
+                    @Html.Label("Empleado", null, new { @class = "lblTitulo" })
+                    @Html.DropDownListFor(d => d.EmpleadoId, new SelectList(ViewBag.ListaEmpleados, "EmpleadoId", "Nombre"), new { @class = "form-control", @disabled = "disabled" })
+                </div>
             </div>
-            <div style="text-align: right;">
-                <input value="Guardar" class="btn btn-success" type="submit" />
+            <div class="col-md-6">
+                <div>
+                    @Html.LabelFor(d => d.Costo, null, new { @class = "lblTitulo" })
+                    @Html.TextBoxFor(d => d.Costo, "", new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(d => d.Costo, "", new { @class = "red" })
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.FechaRenta, null, new { @class = "lblTitulo" })<br />
+                    @Html.EditorFor(d => d.FechaRenta, "", new { @class = "date", htmlAttributes = new { ReadOnly = true, style = "background-color: #EEEEEE" } })
+                    @Html.ValidationMessageFor(d => d.FechaRenta, "", new { @class = "red" })
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.FechaRentaFin, null, new { @class = "lblTitulo" })<br />
+                    @Html.EditorFor(d => d.FechaRentaFin, "", new { @class = "date", htmlAttributes = new { ReadOnly = true, style = "background-color: #EEEEEE" } })
+                    @Html.ValidationMessageFor(d => d.FechaRentaFin, "", new { @class = "red" })
+                </div>
+                <div style="text-align: right;">
+                    <input value="Guardar" class="btn btn-success" type="submit" disabled="disabled" />
+                </div>
             </div>
-        </div>
+        }
     </div>
 }

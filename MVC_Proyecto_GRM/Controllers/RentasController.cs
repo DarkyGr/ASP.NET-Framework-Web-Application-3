@@ -59,21 +59,30 @@ namespace MVC_Proyecto_GRM.Controllers
                 // Validar si modelo es correcto
                 if (ModelState.IsValid && model.VehiculoId != 0 && model.ClienteId != 0 && model.EmpleadoId != 0)
                 {
-                    using (RentaCarrosEntities db = new RentaCarrosEntities())
+                    if (model.FechaRenta < DateTime.Now || model.FechaRentaFin <= model.FechaRenta || model.FechaRentaFin < DateTime.Now)
                     {
-                        var renta = new Rentas();
+                        Alert("La fecha renta debe ser mayor al día actual y fecha renta fin debe ser mayor a fecha renta y al día actual.", NoticationType.warning);
+                        CargarDDL();
+                        return View(model);
+                    }
+                    else
+                    {
+                        using (RentaCarrosEntities db = new RentaCarrosEntities())
+                        {
+                            var renta = new Rentas();
 
-                        renta.VehiculoId = model.VehiculoId; 
-                        renta.ClienteId = model.ClienteId;
-                        renta.EmpleadoId = model.EmpleadoId;
-                        renta.Costo = model.Costo;
-                        renta.FechaRenta = model.FechaRenta;
-                        renta.FechaRentaFin = model.FechaRentaFin;
+                            renta.VehiculoId = model.VehiculoId;
+                            renta.ClienteId = model.ClienteId;
+                            renta.EmpleadoId = model.EmpleadoId;
+                            renta.Costo = model.Costo;
+                            renta.FechaRenta = model.FechaRenta;
+                            renta.FechaRentaFin = model.FechaRentaFin;
 
-                        // Se agrega el nuevo camion
-                        db.Rentas.Add(renta);
-                        db.SaveChanges();
-                        Alert("La Renta ha sido agregada", NoticationType.success);
+                            // Se agrega el nuevo camion
+                            db.Rentas.Add(renta);
+                            db.SaveChanges();
+                            Alert("La Renta ha sido agregada", NoticationType.success);
+                        }
                     }
                     // Redirecciona a la lista de camiones (Controller)
                     return Redirect("~/Rentas");
@@ -93,14 +102,29 @@ namespace MVC_Proyecto_GRM.Controllers
         public ActionResult RentaEditar(int id)
         {
             Rentas renta = new Rentas();
-            CargarDDL();
 
             using (RentaCarrosEntities db = new RentaCarrosEntities())
             {
                 //camion = db.Camiones.Where(x => x.CamionId == camionId).OrderBy(x => x.Matricula).FirstOrDefault();
                 renta = db.Rentas.Where(x => x.RentaId == id).FirstOrDefault();
+                if (renta.FechaRenta > DateTime.Now)
+                {
+                    //Cambia todo
+                    ViewBag.CambiarTodo = 1;
+                }
+                else if (renta.FechaRentaFin < DateTime.Now)
+                {
+                    // No cambia nada
+                    ViewBag.CambiarTodo = 3;
+                }
+                else
+                {
+                    // Cambia solo costo y fecha
+                    ViewBag.CambiarTodo = 2;
+                }
             }
 
+            CargarDDL();
             return View(renta);
         }
 
@@ -110,38 +134,56 @@ namespace MVC_Proyecto_GRM.Controllers
             try
             {
                 // Validar si modelo es correcto
-                if (ModelState.IsValid && model.VehiculoId != 0 && model.ClienteId != 0 && model.EmpleadoId != 0)
+                if (ModelState.IsValid)
                 {
-                    using (RentaCarrosEntities db = new RentaCarrosEntities())
+                    string dateRenta = model.FechaRenta.ToShortDateString();
+                    string dateHoy = model.FechaRenta.ToShortDateString();
+
+                    DateTime dateRentaD = DateTime.Parse(dateRenta);
+                    DateTime dateRentaH = DateTime.Parse(dateHoy);
+
+                    if (dateRentaD >= dateRentaH && model.FechaRentaFin > model.FechaRenta && model.FechaRentaFin > DateTime.Now)
                     {
-                        var renta = new Rentas();
+                        using (RentaCarrosEntities db = new RentaCarrosEntities())
+                        {
+                            var renta = new Rentas();
 
-                        renta.RentaId = model.RentaId;
-                        renta.VehiculoId = model.VehiculoId;
-                        renta.ClienteId = model.ClienteId;
-                        renta.EmpleadoId = model.EmpleadoId;
-                        renta.Costo = model.Costo;
-                        renta.FechaRenta = model.FechaRenta;
-                        renta.FechaRentaFin = model.FechaRentaFin;
+                            renta.RentaId = model.RentaId;
+                            renta.VehiculoId = model.VehiculoId;
+                            renta.ClienteId = model.ClienteId;
+                            renta.EmpleadoId = model.EmpleadoId;
+                            renta.Costo = model.Costo;
+                            renta.FechaRenta = model.FechaRenta;
+                            renta.FechaRentaFin = model.FechaRentaFin;
 
-                        // Se agrega el nuevo camion                        
-                        db.Entry(renta).State = System.Data.Entity.EntityState.Modified;
-                        db.SaveChanges();
+                            // Se agrega el nuevo camion                        
+                            db.Entry(renta).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
 
-                        Alert("La Renta ha sido agregada", NoticationType.success);
+                            Alert("La Renta ha sido actualizada.", NoticationType.success);
+                        }
+                        // Redirecciona a la lista de camiones
+                        return Redirect("~/Rentas");
                     }
-                    // Redirecciona a la lista de camiones
-                    return Redirect("~/Rentas");
+                    else
+                    {
+                        Alert("NO SE PUDO REALIZAR LA ACTUALIZACIÓN. La fecha renta debe ser mayor o igual al día de hoy y la fecha renta fin debe ser mayor a la fecha renta y al día de hoy.", NoticationType.error);
+                        CargarDDL();
+                        return Redirect("~/Rentas");
+                        //return View(model);
+                    }
                 }
-                Alert("Verificar la información", NoticationType.warning);
+                Alert("NO SE PUDO REALIZAR LA ACTUALIZACIÓN. Verifica los campos.", NoticationType.warning);
                 CargarDDL();
-                return View(model);
+                return Redirect("~/Rentas");
+                //return View(model);
             }
             catch (Exception ex)
             {
-                Alert("Verificar la información", NoticationType.warning);
+                Alert("NO SE PUDO REALIZAR LA ACTUALIZACIÓN. Verificar la información", NoticationType.warning);
                 CargarDDL();
-                return View(model);
+                return Redirect("~/Rentas");
+                //return View(model);
             }
         }
 
@@ -154,11 +196,21 @@ namespace MVC_Proyecto_GRM.Controllers
                 using (RentaCarrosEntities db = new RentaCarrosEntities())
                 {
                     renta = db.Rentas.Where(x => x.RentaId == id).FirstOrDefault();
-                    db.Rentas.Remove(renta);
-                    db.SaveChanges();
+
+                    if (renta.FechaRenta > DateTime.Now)
+                    {
+                        db.Rentas.Remove(renta);
+                        db.SaveChanges();
+                        Alert("Renta Eliminada con éxito.", NoticationType.success);
+                        return Redirect("~/Rentas");
+                    }
+                    else
+                    {
+                        Alert("No se puede eliminar la renta porque la fecha ya paso de la fecha actual.", NoticationType.error);
+                        return Redirect("~/Rentas");
+                    }
                 }
-                Alert("Renta Eliminada con éxito.", NoticationType.success);
-                return Redirect("~/Rentas");
+
             }
             catch (Exception ex)
             {
