@@ -15,19 +15,20 @@
     <div class="row">
         <div class="col-md-6">
             @Html.HiddenFor(d => d.EmpleadoId)
+            @Html.HiddenFor(d => d.DireccionId)
             <div>
                 @Html.LabelFor(d => d.Nombre, null, new { @class = "lblTitulo" })
-                @Html.TextBoxFor(d => d.Nombre, "", new { @class = "form-control" })
+                @Html.TextBoxFor(d => d.Nombre, "", new { @class = "form-control", @readonly = "readonly" })
                 @Html.ValidationMessageFor(d => d.Nombre, "", new { @class = "red" })
             </div>
             <div>
                 @Html.LabelFor(d => d.ApellidoP, null, new { @class = "lblTitulo" })
-                @Html.TextBoxFor(d => d.ApellidoP, "", new { @class = "form-control" })
+                @Html.TextBoxFor(d => d.ApellidoP, "", new { @class = "form-control", @readonly = "readonly" })
                 @Html.ValidationMessageFor(d => d.ApellidoP, "", new { @class = "red" })
             </div>
             <div>
                 @Html.LabelFor(d => d.ApellidoM, null, new { @class = "lblTitulo" })
-                @Html.TextBoxFor(d => d.ApellidoM, "", new { @class = "form-control" })
+                @Html.TextBoxFor(d => d.ApellidoM, "", new { @class = "form-control", @readonly = "readonly" })
                 @Html.ValidationMessageFor(d => d.ApellidoM, "", new { @class = "red" })
             </div>            
         </div>
@@ -44,7 +45,7 @@
             </div>
             <div>
                 @Html.Label("Dirección", null, new { @class = "lblTitulo" })
-                @Html.DropDownListFor(d => d.DireccionId, new SelectList(ViewBag.ListaDirecciones, "DireccionId", "Direccion"), new { @class = "form-control" })
+                @Html.DropDownListFor(d => d.DireccionId, new SelectList(ViewBag.ListaDirecciones, "DireccionId", "Direccion"), new { @class = "form-control", @disabled = "disabled" })
             </div>
             <div style="text-align: right;">
                 <input value="Guardar" class="btn btn-success" type="submit" />

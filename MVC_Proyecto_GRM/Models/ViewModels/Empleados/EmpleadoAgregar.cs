@@ -12,7 +12,7 @@ namespace MVC_Proyecto_GRM.Models.ViewModels.Empleados
         public int EmpleadoId { get; set; }
 
         [Required]  // Data validator
-        [Display(Name = "Dirección")]   // Manda el name de lo que falta
+        [Display(Name = "ID Dirección")]   // Manda el name de lo que falta
         public int DireccionId { get; set; }
 
         [Required]  // Data validator

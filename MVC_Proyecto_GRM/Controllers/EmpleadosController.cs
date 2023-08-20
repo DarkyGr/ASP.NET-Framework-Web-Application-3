@@ -161,7 +161,7 @@ namespace MVC_Proyecto_GRM.Controllers
             }
             catch (Exception ex)
             {
-                Alert("Error: " + ex.Message, NoticationType.error);
+                Alert("No se puede eliminar porque el empleado posee una o varias rentas.", NoticationType.error);
                 return Redirect("~/Empleados");
             }
         }
