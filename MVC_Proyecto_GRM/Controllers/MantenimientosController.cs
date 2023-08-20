@@ -51,7 +51,7 @@ namespace MVC_Proyecto_GRM.Controllers
             try
             {
                 // Validar si modelo es correcto
-                if (ModelState.IsValid && model.VehiculoId != 0)
+                if (ModelState.IsValid && model.VehiculoId != 0 && model.Nota != "" && (model.Fecha).ToString() != "")
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
@@ -69,7 +69,7 @@ namespace MVC_Proyecto_GRM.Controllers
                     // Redirecciona a la lista de camiones (Controller)
                     return Redirect("~/Mantenimientos");
                 }
-                Alert("Verificar la información", NoticationType.warning);
+                Alert("No pueden quedar vacíos los campos.", NoticationType.warning);
                 CargarDDL();
                 return View(model);
             }
@@ -101,7 +101,7 @@ namespace MVC_Proyecto_GRM.Controllers
             try
             {
                 // Validar si modelo es correcto
-                if (ModelState.IsValid && model.VehiculoId != 0)
+                if (ModelState.IsValid && model.Nota != "")
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
@@ -121,7 +121,7 @@ namespace MVC_Proyecto_GRM.Controllers
                     // Redirecciona a la lista de camiones
                     return Redirect("~/Mantenimientos");
                 }
-                Alert("Verificar la información", NoticationType.warning);
+                Alert("No pueden quedar vacíos los campos.", NoticationType.warning);
                 CargarDDL();
                 return View(model);
             }

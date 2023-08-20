@@ -15,20 +15,21 @@
     <div class="row">
         <div class="col-md-6">
             @Html.HiddenFor(d => d.MantenimientoId)
+            @Html.HiddenFor(d => d.VehiculoId)
             <div>
                 @Html.Label("Vehículo", null, new { @class = "lblTitulo" })
-                @Html.DropDownListFor(d => d.VehiculoId, new SelectList(ViewBag.ListaVehiculos, "VehiculoId", "Info"), new { @class = "form-control" })
+                @Html.DropDownListFor(d => d.VehiculoId, new SelectList(ViewBag.ListaVehiculos, "VehiculoId", "Info"), new { @class = "form-control", @disabled = "disabled" })
             </div>
             <div>
                 @Html.LabelFor(d => d.Nota, null, new { @class = "lblTitulo" })
                 @Html.TextBoxFor(d => d.Nota, "", new { @class = "form-control" })
                 @Html.ValidationMessageFor(d => d.Nota, "", new { @class = "red" })
-            </div>            
+            </div>
         </div>
         <div class="col-md-6">
             <div>
                 @Html.LabelFor(d => d.Fecha, null, new { @class = "lblTitulo" })<br />
-                @Html.EditorFor(d => d.Fecha, "", new { @class = "date" })
+                @Html.EditorFor(d => d.Fecha, "", new { @class = "date", htmlAttributes = new { ReadOnly = true, style = "background-color: #EEEEEE" } })
                 @Html.ValidationMessageFor(d => d.Fecha, "", new { @class = "red" })
             </div>
             <div style="text-align: right;">
