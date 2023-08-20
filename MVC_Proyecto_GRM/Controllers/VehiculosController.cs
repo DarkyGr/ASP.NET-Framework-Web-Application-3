@@ -11,7 +11,7 @@ using static MVC_Proyecto_GRM.Models.Enum;
 namespace MVC_Proyecto_GRM.Controllers
 {
     public class VehiculosController : Controller
-    {
+    {        
         // GET: Vehiculos
         public ActionResult Index()
         {
@@ -51,8 +51,17 @@ namespace MVC_Proyecto_GRM.Controllers
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
+                        foreach (var item in db.Vehiculos)
+                        {
+                            if (item.Matricula == model.Matricula)
+                            {
+                                Alert("Ya existe un vehículo con la misma matrícula.", NoticationType.error);
+                                return View(model);
+                            }
+                        }
+
                         var vehiculo = new Vehiculos();
-                        
+
                         vehiculo.Matricula = model.Matricula;
                         vehiculo.Marca = model.Marca;
                         vehiculo.Modelo = model.Modelo;
@@ -64,6 +73,7 @@ namespace MVC_Proyecto_GRM.Controllers
                         db.SaveChanges();
 
                         Alert("El Vehículo ha sido agregado", NoticationType.success);
+
                     }
                     // Redirecciona a la lista de camiones (Controller)
                     return Redirect("~/Vehiculos");
@@ -114,12 +124,12 @@ namespace MVC_Proyecto_GRM.Controllers
                         db.Entry(vehiculo).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
 
-                        Alert("El Vehículo ha sido agregado", NoticationType.success);
+                        Alert("El Vehículo ha sido actualizado", NoticationType.success);
                     }
                     // Redirecciona a la lista de camiones
                     return Redirect("~/Vehiculos");
                 }
-                Alert("Verificar la información", NoticationType.warning);
+                Alert("El kilometraje no puede estar vacío y debe ser mayor o igual al que tenía", NoticationType.warning);
                 return View(model);
             }
             catch (Exception ex)
@@ -147,7 +157,7 @@ namespace MVC_Proyecto_GRM.Controllers
             }
             catch (Exception ex)
             {
-                Alert("Error: " + ex.Message, NoticationType.error);
+                Alert("El Vehículo no puede ser eliminado porque posee mantenimiento(s) o renta(s).", NoticationType.error);
                 return Redirect("~/Vehiculos");
             }
         }
