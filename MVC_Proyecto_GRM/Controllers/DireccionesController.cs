@@ -152,7 +152,7 @@ namespace MVC_Proyecto_GRM.Controllers
             }
             catch (Exception ex)
             {
-                Alert("Error: " + ex.Message, NoticationType.error);
+                Alert("No se puede eliminar la dirección porque la posee uno o varios clientes/empleados.", NoticationType.error);
                 return Redirect("~/Direcciones");
             }
         }
