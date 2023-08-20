@@ -60,6 +60,16 @@ namespace MVC_Proyecto_GRM.Controllers
                 {
                     using (RentaCarrosEntities db = new RentaCarrosEntities())
                     {
+                        foreach (var item in db.Clientes)
+                        {
+                            if (item.NumLicencia == model.NumLicencia)
+                            {
+                                Alert("Ya existe un cliente con el mismo número de licencia.", NoticationType.error);
+                                CargarDDL();
+                                return View(model);
+                            }
+                        }
+
                         var cliente = new Clientes();                        
 
                         cliente.DireccionId = model.DireccionId;
@@ -164,7 +174,7 @@ namespace MVC_Proyecto_GRM.Controllers
             }
             catch (Exception ex)
             {
-                Alert("Error: " + ex.Message, NoticationType.error);
+                Alert("No se puede eliminar porque el cliente ya posee una o varias rentas.", NoticationType.error);
                 return Redirect("~/Clientes");
             }
         }
