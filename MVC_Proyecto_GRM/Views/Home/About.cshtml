@@ -16,9 +16,9 @@
                         <h5 class="card-title text-center">Rentas</h5>                        
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Agregar --> No vacíos y la fecha renta fin debe ser mayor a la fecha renta.</li>
-                        <li class="list-group-item">Editar ---> No vacíos y se puede editar todo mientras la fecha de renta no sea mayor a la actual, en caso contrario solo se puede editar el costo y la fecha renta fin. Tambien si la fehca renta fin es mayor a hoy no se puede editar.</li>
-                        <li class="list-group-item">Eliminar -> Solo se puede eliminar una renta si la fecha renta no es mayor a la actual.</li>
+                        <li class="list-group-item">Agregar --> No vacíos, fecha renta deber ser mayor o igual al día actual y la fecha renta fin debe ser mayor a la fecha renta y a la fecha actual (hablando de reglas de negocios solo se toma la fecha y no el tiempo, ya que este viene incluido con el DateTime).</li>
+                        <li class="list-group-item">Editar ---> No vacíos, se puede editar todo mientras la fecha de renta no sea mayor a la actual en caso contrario, solo se puede editar el costo y la fecha renta fin. Tambien si la fecha renta fin es mayor a hoy no se puede editar.</li>
+                        <li class="list-group-item">Eliminar -> Solo se puede eliminar una renta si la fecha renta es mayor a la actual.</li>
                     </ul>
                     <div class="card-body">
                         @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
@@ -48,7 +48,7 @@
                         <h5 class="card-title text-center">Clientes</h5>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Agregar --> No vacíos y solo se agregará si no se repite el teléfono y número de licencia.</li>
+                        <li class="list-group-item">Agregar --> No vacíos y solo se agregará si no se repite el número de licencia.</li>
                         <li class="list-group-item">Editar ---> No vacíos y solo se puede editar el teléfono y dirección.</li>
                         <li class="list-group-item">Eliminar -> No se puede eliminar un cliente si posee una o varias rentas.</li>
                     </ul>
@@ -65,7 +65,7 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Agregar --> No vacíos.</li>
                         <li class="list-group-item">Editar ---> No vacíos.</li>
-                        <li class="list-group-item">Eliminar -> No se puede eliminar una dirección si un cliente o empleado la posee.</li>
+                        <li class="list-group-item">Eliminar -> No se puede eliminar una dirección si un cliente(s) o empleado(s) la posee.</li>
                     </ul>
                     <div class="card-body">
                         @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
@@ -80,9 +80,9 @@
                         <h5 class="card-title text-center">Vehículos</h5>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Agregar --> No vacíos.</li>
-                        <li class="list-group-item">Editar ---> No vacíos y no se puede editar la marca, modelo y capacidad.</li>
-                        <li class="list-group-item">Eliminar -> No se puede eliminar un vehículo si cuenta con uno o varios mantenimientos.</li>
+                        <li class="list-group-item">Agregar --> No vacíos y no se puede repetir matrícula.</li>
+                        <li class="list-group-item">Editar ---> No vacíos y solo se puede editar el kilometraje (falto agregar la condición de que fuera mayor o igual al kilometraje que ya tenia para poder cambiar).</li>
+                        <li class="list-group-item">Eliminar -> No se puede eliminar un vehículo si cuenta con mantenimiento(s) o renta(s).</li>
                     </ul>
                     <div class="card-body">
                         @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "btn btn-primary" })
@@ -96,7 +96,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Agregar --> No vacíos.</li>
-                        <li class="list-group-item">Editar ---> No se puede editar el vehículo y la fecha.</li>
+                        <li class="list-group-item">Editar ---> No vacíos y no se puede editar el vehículo y la fecha.</li>
                         <li class="list-group-item">Eliminar -> Se puede eliminar cualquier mantenimiento.</li>
                     </ul>
                     <div class="card-body">
